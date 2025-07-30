@@ -1,0 +1,9 @@
+streamlit
+openai
+sentence-transformers
+fuzzywuzzy[speedup]
+python-dotenv
+numpy
+scikit-learn
+joblib
+SpeechRecognition
