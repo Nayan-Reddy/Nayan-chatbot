@@ -3,7 +3,7 @@ openai
 sentence-transformers
 fuzzywuzzy[speedup]
 python-dotenv
-numpy
+numpy<2
 scikit-learn
 joblib
 SpeechRecognition
