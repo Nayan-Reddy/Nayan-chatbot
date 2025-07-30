@@ -7,4 +7,4 @@ numpy
 scikit-learn
 joblib
 SpeechRecognition
-torch==2.2.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2
