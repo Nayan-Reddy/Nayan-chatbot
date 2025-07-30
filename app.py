@@ -10,6 +10,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 import speech_recognition as sr
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, AudioProcessorBase
+import av
+import io
 
 # ----------------- CONFIG -----------------
 st.set_page_config(page_title="Nayan’s AI Chatbot", layout="centered")
@@ -101,42 +104,90 @@ def get_best_fallback(user_input):
     return None
 
 # ----------------- VOICE INPUT FUNCTION -----------------
+class AudioProcessor(AudioProcessorBase):
+    def __init__(self):
+        self.audio_buffer = io.BytesIO()
+
+    def recv_audio(self, frame: av.AudioFrame) -> av.AudioFrame:
+        # Save raw audio to buffer
+        audio_array = frame.to_ndarray()
+        self.audio_buffer.write(audio_array.tobytes())
+        return frame
+
 def capture_voice():
     recognizer = sr.Recognizer()
     recognizer.energy_threshold = 150  # Default sensitivity
 
     listening_placeholder = st.empty()
 
-    try:
-        with sr.Microphone() as source:
-            # Calibrate only once per session
+    # WebRTC browser mic
+    webrtc_ctx = webrtc_streamer(
+        key="speech",
+        mode=WebRtcMode.SENDONLY,
+        audio_processor_factory=AudioProcessor,
+        media_stream_constraints={
+            "audio": {
+                "echoCancellation": True,
+                "noiseSuppression": True,
+            },
+            "video": False
+        },
+        async_processing=False,
+    )
+
+    if webrtc_ctx.audio_processor:
+        try:
             if "calibrated" not in st.session_state or not st.session_state.calibrated:
-                recognizer.adjust_for_ambient_noise(source, duration=1.5)
-                # Safety floor for very quiet environments
+                st.session_state.calibrated = True
                 if recognizer.energy_threshold < 120:
                     recognizer.energy_threshold = 120
-                st.session_state.calibrated = True
-                
 
-            # Show listening AFTER calibration
             listening_placeholder.info("🎤 Listening... Please speak clearly.")
 
-            audio = recognizer.listen(source, timeout=7, phrase_time_limit=20)
+            audio_data = webrtc_ctx.audio_processor.audio_buffer.getvalue()
+            if audio_data:
+                # Reset buffer after reading
+                webrtc_ctx.audio_processor.audio_buffer = io.BytesIO()
 
-        listening_placeholder.empty()
+                # Wrap PCM data in WAV for SpeechRecognition
+                import wave
+                wav_io = io.BytesIO()
+                with wave.open(wav_io, 'wb') as wav_file:
+                    wav_file.setnchannels(1)
+                    wav_file.setsampwidth(2)
+                    wav_file.setframerate(16000)
+                    wav_file.writeframes(audio_data)
+                wav_io.seek(0)
 
-        text = recognizer.recognize_google(audio, language="en-IN")
-        return text
+                audio_stream = sr.AudioFile(wav_io)
+                with audio_stream as source:
+                    audio = recognizer.listen(source, timeout=5, phrase_time_limit=15)
 
-    except sr.UnknownValueError:
-        listening_placeholder.empty()
-        st.error("⚠️ No speech detected or unclear speech. Please try again or type your question.")
-        return None
+                listening_placeholder.empty()
 
-    except sr.RequestError:
-        listening_placeholder.empty()
-        st.error("❌ Speech service unavailable. Please type your question.")
-        return None
+                # Stop the mic session automatically
+                webrtc_ctx.stop()
+
+                text = recognizer.recognize_google(audio, language="en-IN")
+                return text
+
+        except sr.WaitTimeoutError:
+            listening_placeholder.empty()
+            st.warning("⏱ No speech detected — mic stopped automatically.")
+            webrtc_ctx.stop()
+            return None
+
+        except sr.UnknownValueError:
+            listening_placeholder.empty()
+            st.error("⚠️ No speech detected or unclear speech. Please try again or type your question.")
+            webrtc_ctx.stop()
+            return None
+
+        except sr.RequestError:
+            listening_placeholder.empty()
+            st.error("❌ Speech service unavailable. Please type your question.")
+            webrtc_ctx.stop()
+            return None
 
 
 # ----------------- UI HEADER -----------------

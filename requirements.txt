@@ -7,5 +7,7 @@ numpy<2
 scikit-learn
 joblib
 SpeechRecognition
+streamlit-webrtc
+pyaudio
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.2.2+cpu
