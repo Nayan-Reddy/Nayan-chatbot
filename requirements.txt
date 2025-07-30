@@ -1,7 +1,8 @@
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu
 streamlit
 openai
 sentence-transformers
-torch==2.2.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 fuzzywuzzy[speedup]
 python-dotenv
 numpy
