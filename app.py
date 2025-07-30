@@ -33,7 +33,7 @@ with open(os.path.join(BASE_DIR, "fallback_qna.json"), "r", encoding="utf-8") as
 
 fallback_embeddings = joblib.load(os.path.join(BASE_DIR, "fallback_embeddings.pkl"))
 
-embedder = SentenceTransformer("BAAI/bge-large-en")
+embedder = SentenceTransformer("BAAI/bge-small-en")
 
 # ----------------- CLEAN + FILTER -----------------
 def clean(text):

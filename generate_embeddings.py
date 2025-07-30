@@ -7,7 +7,7 @@ with open("fallback_qna.json", "r", encoding="utf-8") as f:
     fallback_data = json.load(f)
 
 # Load embedding model
-model = SentenceTransformer("BAAI/bge-large-en")
+model = SentenceTransformer("BAAI/bge-small-en")
 
 embeddings = []
 
