@@ -10,9 +10,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 import speech_recognition as sr
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, AudioProcessorBase
-import av
+from streamlit_mic_recorder import mic_recorder
 import io
+
 
 # ----------------- CONFIG -----------------
 st.set_page_config(page_title="Nayan’s AI Chatbot", layout="centered")
@@ -104,90 +104,66 @@ def get_best_fallback(user_input):
     return None
 
 # ----------------- VOICE INPUT FUNCTION -----------------
-class AudioProcessor(AudioProcessorBase):
-    def __init__(self):
-        self.audio_buffer = io.BytesIO()
-
-    def recv_audio(self, frame: av.AudioFrame) -> av.AudioFrame:
-        # Save raw audio to buffer
-        audio_array = frame.to_ndarray()
-        self.audio_buffer.write(audio_array.tobytes())
-        return frame
+from streamlit_mic_recorder import mic_recorder
+import speech_recognition as sr
+import streamlit as st
 
 def capture_voice():
-    recognizer = sr.Recognizer()
-    recognizer.energy_threshold = 150  # Default sensitivity
+    """Captures voice input using mic_recorder, transcribes to text with Google Speech Recognition."""
+    if "is_recording" not in st.session_state:
+        st.session_state.is_recording = False
 
     listening_placeholder = st.empty()
 
-    # WebRTC browser mic
-    webrtc_ctx = webrtc_streamer(
-        key="speech",
-        mode=WebRtcMode.SENDONLY,
-        audio_processor_factory=AudioProcessor,
-        media_stream_constraints={
-            "audio": {
-                "echoCancellation": True,
-                "noiseSuppression": True,
-            },
-            "video": False
-        },
-        async_processing=False,
-    )
+    # Prevent multiple recordings at once
+    if st.session_state.is_recording:
+        st.warning("🎤 Already recording... Please wait.")
+        return None
 
-    if webrtc_ctx.audio_processor:
-        try:
-            if "calibrated" not in st.session_state or not st.session_state.calibrated:
-                st.session_state.calibrated = True
-                if recognizer.energy_threshold < 120:
-                    recognizer.energy_threshold = 120
+    try:
+        st.session_state.is_recording = True
+        listening_placeholder.info("🎤 Listening... Please speak clearly.")
 
-            listening_placeholder.info("🎤 Listening... Please speak clearly.")
+        # Record voice input
+        audio = mic_recorder(
+            start_prompt="🎤 Speak now",
+            just_once=True,
+            use_container_width=True
+        )
 
-            audio_data = webrtc_ctx.audio_processor.audio_buffer.getvalue()
-            if audio_data:
-                # Reset buffer after reading
-                webrtc_ctx.audio_processor.audio_buffer = io.BytesIO()
-
-                # Wrap PCM data in WAV for SpeechRecognition
-                import wave
-                wav_io = io.BytesIO()
-                with wave.open(wav_io, 'wb') as wav_file:
-                    wav_file.setnchannels(1)
-                    wav_file.setsampwidth(2)
-                    wav_file.setframerate(16000)
-                    wav_file.writeframes(audio_data)
-                wav_io.seek(0)
-
-                audio_stream = sr.AudioFile(wav_io)
-                with audio_stream as source:
-                    audio = recognizer.listen(source, timeout=5, phrase_time_limit=15)
-
-                listening_placeholder.empty()
-
-                # Stop the mic session automatically
-                webrtc_ctx.stop()
-
-                text = recognizer.recognize_google(audio, language="en-IN")
-                return text
-
-        except sr.WaitTimeoutError:
+        if not audio:  # No audio captured
             listening_placeholder.empty()
-            st.warning("⏱ No speech detected — mic stopped automatically.")
-            webrtc_ctx.stop()
+            st.session_state.is_recording = False
             return None
+
+        listening_placeholder.empty()
+        r = sr.Recognizer()
+
+        # Extract audio details
+        sample_rate = audio.get("sample_rate", 16000)
+        sample_width = audio.get("sample_width", 2)
+        audio_data = sr.AudioData(audio["bytes"], sample_rate, sample_width)
+
+        # Transcribe speech
+        try:
+            text = r.recognize_google(audio_data, language="en-IN")
+            return text.strip()
 
         except sr.UnknownValueError:
-            listening_placeholder.empty()
-            st.error("⚠️ No speech detected or unclear speech. Please try again or type your question.")
-            webrtc_ctx.stop()
+            st.error("⚠️ No speech detected or unclear speech. Please try again.")
             return None
 
-        except sr.RequestError:
-            listening_placeholder.empty()
-            st.error("❌ Speech service unavailable. Please type your question.")
-            webrtc_ctx.stop()
+        except sr.RequestError as e:
+            st.error(f"❌ Speech service unavailable. Please type your question.")
             return None
+
+    except Exception as e:
+        st.error(f"❌ Voice capture failed: {e}")
+        return None
+
+    finally:
+        st.session_state.is_recording = False
+
 
 
 # ----------------- UI HEADER -----------------
