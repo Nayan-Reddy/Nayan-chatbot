@@ -396,6 +396,8 @@ with st._bottom:
             mode=WebRtcMode.SENDONLY,
             audio_processor_factory=VADAudioProcessor,
             media_stream_constraints={"video": False, "audio": True},
+            rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
         )
         
     else:
