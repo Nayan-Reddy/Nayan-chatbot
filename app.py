@@ -308,12 +308,7 @@ with st._bottom:
     if st.session_state.is_recording:
         # --- RECORDING STATE ---
         # Show the audio recorder
-        wav_audio_data = st_audiorec(
-            icon_name="microphone-lines",
-            icon_size="3x",
-            neutral_color="#64748B",
-            recording_color="#E11D48",
-        )
+        wav_audio_data = st_audiorec()
         
         # A placeholder to show the recording status
         st.info("Recording... Click the icon again to stop and process.")
