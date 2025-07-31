@@ -12,6 +12,9 @@ from openai import OpenAI
 import speech_recognition as sr
 from streamlit_mic_recorder import mic_recorder
 import io
+import time
+import webrtcvad
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 
 # ----------------- CONFIG -----------------
@@ -104,65 +107,75 @@ def get_best_fallback(user_input):
     return None
 
 # ----------------- VOICE INPUT FUNCTION -----------------
-from streamlit_mic_recorder import mic_recorder
-import speech_recognition as sr
-import streamlit as st
+
 
 def capture_voice():
-    """Captures voice input using mic_recorder, transcribes to text with Google Speech Recognition."""
-    if "is_recording" not in st.session_state:
-        st.session_state.is_recording = False
-
+    recognizer = sr.Recognizer()
     listening_placeholder = st.empty()
 
-    # Prevent multiple recordings at once
-    if st.session_state.is_recording:
-        st.warning("🎤 Already recording... Please wait.")
-        return None
+    ctx = webrtc_streamer(
+        key="voice_input_webrtc",
+        mode=WebRtcMode.SENDONLY,
+        rtc_configuration=RTCConfiguration(
+            {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+        ),
+        media_stream_constraints={"video": False, "audio": True},
+    )
 
-    try:
-        st.session_state.is_recording = True
-        listening_placeholder.info("🎤 Listening... Please speak clearly.")
+    vad = webrtcvad.Vad(3)
+    sample_rate = 16000
+    frame_duration_ms = 30
+    frame_size = int(sample_rate * frame_duration_ms / 1000)
 
-        # Record voice input
-        audio = mic_recorder(
-            start_prompt="🎤 Speak now",
-            just_once=True,
-            use_container_width=True
-        )
+    speech_frames_buffer = []
+    silence_counter = 0
+    silence_limit = 5  # ~150ms of silence after speech ends
+    is_speaking = False
 
-        if not audio:  # No audio captured
-            listening_placeholder.empty()
-            st.session_state.is_recording = False
-            return None
+    if ctx.audio_receiver:
+        listening_placeholder.info("🎤 Listening... Speak when ready.")
 
-        listening_placeholder.empty()
-        r = sr.Recognizer()
+        while True:
+            audio_frames = ctx.audio_receiver.get_frames(timeout=1)
+            for frame in audio_frames:
+                pcm_frame = frame.to_ndarray(format="s16le")
+                raw_audio_bytes = pcm_frame.tobytes()
 
-        # Extract audio details
-        sample_rate = audio.get("sample_rate", 16000)
-        sample_width = audio.get("sample_width", 2)
-        audio_data = sr.AudioData(audio["bytes"], sample_rate, sample_width)
+                for i in range(0, len(raw_audio_bytes), frame_size * 2):
+                    chunk = raw_audio_bytes[i:i + frame_size * 2]
+                    if len(chunk) < frame_size * 2:
+                        continue
 
-        # Transcribe speech
+                    if vad.is_speech(chunk, sample_rate):
+                        is_speaking = True
+                        silence_counter = 0
+                        speech_frames_buffer.append(chunk)
+                    elif is_speaking:
+                        silence_counter += 1
+                        if silence_counter > silence_limit:
+                            break
+
+            if is_speaking and silence_counter > silence_limit:
+                break
+
+            time.sleep(0.01)
+
+    listening_placeholder.empty()
+
+    if speech_frames_buffer:
+        audio_data = sr.AudioData(b"".join(speech_frames_buffer), sample_rate, 2)
         try:
-            text = r.recognize_google(audio_data, language="en-IN")
-            return text.strip()
-
+            text = recognizer.recognize_google(audio_data, language="en-IN")
+            return text
         except sr.UnknownValueError:
-            st.error("⚠️ No speech detected or unclear speech. Please try again.")
-            return None
-
+            st.error("⚠️ Could not understand speech.")
         except sr.RequestError as e:
-            st.error(f"❌ Speech service unavailable. Please type your question.")
-            return None
+            st.error(f"❌ Speech service unavailable: {e}")
+    else:
+        st.error("⚠️ No speech detected.")
 
-    except Exception as e:
-        st.error(f"❌ Voice capture failed: {e}")
-        return None
+    return None
 
-    finally:
-        st.session_state.is_recording = False
 
 
 

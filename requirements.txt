@@ -8,5 +8,8 @@ scikit-learn
 joblib
 SpeechRecognition
 streamlit-mic-recorder
+streamlit-webrtc
+webrtcvad
+av
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.2.2+cpu
