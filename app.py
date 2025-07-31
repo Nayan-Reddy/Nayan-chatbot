@@ -289,55 +289,69 @@ if "messages" not in st.session_state:
         )
     }]
 
+if "show_prompts" not in st.session_state:
     st.session_state.show_prompts = True
 if "fallback_history" not in st.session_state:
     st.session_state.fallback_history = []
 if "last_fallback_qna" not in st.session_state:
     st.session_state.last_fallback_qna = None
-    
-# --- ✅ NEW: VOICE INPUT IN SIDEBAR ---
-st.sidebar.header("Voice Input")
-st.sidebar.write("Click the icon below to record your question.")
-wav_audio_data = st_audiorec(
-    icon_name="microphone-lines",
-    icon_size="2x",
-    neutral_color="#64748B",
-    recording_color="#E11D48",
-    )
+# 💡 Add a new flag to control the recording state
+if 'is_recording' not in st.session_state:
+    st.session_state.is_recording = False
 
-transcript = None
-if wav_audio_data:
-    st.sidebar.audio(wav_audio_data, format='audio/wav')
-    audio_bytes = io.BytesIO(wav_audio_data)
-    recognizer = sr.Recognizer()
-    try:
-        with sr.AudioFile(audio_bytes) as source:
-            audio = recognizer.record(source)
-        transcript = recognizer.recognize_google(audio, language="en-IN")
-        st.sidebar.success(f"You said: \"{transcript}\"")
-    except sr.UnknownValueError:
-        st.sidebar.error("⚠️ Speech was unclear. Please try again.")
-    except sr.RequestError:
-        st.sidebar.error("❌ Speech service unavailable. Check connection or type your question.")
+# Initialize user_input variable
+user_input = None
 
-
-# ----------------- MIC BUTTON -----------------
-# Create a horizontal layout for mic + chat input
+# --- ✅ MODIFIED: INTEGRATED CHAT & VOICE INPUT ---
+# This block now controls the UI at the bottom of the page
 with st._bottom:
-    cols = st.columns([0.93, 0.07])
-    with cols[0]:
-        user_input = st.chat_input("Ask a question...")
-    with cols[1]:
-        mic_clicked = st.button("🎤", help="Speak your question", use_container_width=True)
-    
+    if st.session_state.is_recording:
+        # --- RECORDING STATE ---
+        # Show the audio recorder
+        wav_audio_data = st_audiorec(
+            icon_name="microphone-lines",
+            icon_size="3x",
+            neutral_color="#64748B",
+            recording_color="#E11D48",
+        )
+        
+        # A placeholder to show the recording status
+        st.info("Recording... Click the icon again to stop and process.")
 
-user_input = st.chat_input("Ask a question...")
+        if wav_audio_data:
+            # When audio is recorded, process it
+            audio_bytes = io.BytesIO(wav_audio_data)
+            recognizer = sr.Recognizer()
+            try:
+                with sr.AudioFile(audio_bytes) as source:
+                    audio = recognizer.record(source)
+                # Use the recognized text as user_input
+                user_input = recognizer.recognize_google(audio, language="en-IN")
+            except sr.UnknownValueError:
+                st.error("⚠️ Speech was unclear. Please try again or type your question.")
+            except sr.RequestError:
+                st.error("❌ Speech service unavailable. Please type your question.")
+            
+            # Reset the recording flag to return to the default text input UI
+            st.session_state.is_recording = False
+            st.rerun() # Rerun to immediately process the input and update the UI
 
-if transcript:
-    user_input = transcript # Prioritize voice input
-if user_input and st.session_state.show_prompts:
-    st.session_state.show_prompts = False
+    else:
+        # --- DEFAULT TEXT INPUT STATE ---
+        cols = st.columns([0.9, 0.1])
+        with cols[0]:
+            # Use a key to grab the input value
+            user_input_text = st.chat_input("Ask a question...", key="chat_input")
+            if user_input_text:
+                user_input = user_input_text
 
+        with cols[1]:
+            # The mic button now just toggles the state
+            if st.button("🎤", help="Speak your question", use_container_width=True):
+                st.session_state.is_recording = True
+                st.rerun() # Immediately rerun to show the recorder
+                
+                
 if st.session_state.show_prompts:
     st.markdown("""
     <div style='text-align: center; margin-bottom: 25px; color: #c9d1d9; font-size: 15px;'>
