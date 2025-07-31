@@ -10,11 +10,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 import speech_recognition as sr
-from streamlit_mic_recorder import mic_recorder
+from st_audiorec import st_audiorec  # 💡 Import the browser-based audio recorder
 import io
-import time
-import webrtcvad
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 
 # ----------------- CONFIG -----------------
@@ -107,76 +104,6 @@ def get_best_fallback(user_input):
     return None
 
 # ----------------- VOICE INPUT FUNCTION -----------------
-
-
-def capture_voice():
-    recognizer = sr.Recognizer()
-    listening_placeholder = st.empty()
-
-    ctx = webrtc_streamer(
-        key="voice_input_webrtc",
-        mode=WebRtcMode.SENDONLY,
-        rtc_configuration=RTCConfiguration(
-            {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-        ),
-        media_stream_constraints={"video": False, "audio": True},
-    )
-
-    vad = webrtcvad.Vad(3)
-    sample_rate = 16000
-    frame_duration_ms = 30
-    frame_size = int(sample_rate * frame_duration_ms / 1000)
-
-    speech_frames_buffer = []
-    silence_counter = 0
-    silence_limit = 5  # ~150ms of silence after speech ends
-    is_speaking = False
-
-    if ctx.audio_receiver:
-        listening_placeholder.info("🎤 Listening... Speak when ready.")
-
-        while True:
-            audio_frames = ctx.audio_receiver.get_frames(timeout=1)
-            for frame in audio_frames:
-                pcm_frame = frame.to_ndarray(format="s16le")
-                raw_audio_bytes = pcm_frame.tobytes()
-
-                for i in range(0, len(raw_audio_bytes), frame_size * 2):
-                    chunk = raw_audio_bytes[i:i + frame_size * 2]
-                    if len(chunk) < frame_size * 2:
-                        continue
-
-                    if vad.is_speech(chunk, sample_rate):
-                        is_speaking = True
-                        silence_counter = 0
-                        speech_frames_buffer.append(chunk)
-                    elif is_speaking:
-                        silence_counter += 1
-                        if silence_counter > silence_limit:
-                            break
-
-            if is_speaking and silence_counter > silence_limit:
-                break
-
-            time.sleep(0.01)
-
-    listening_placeholder.empty()
-
-    if speech_frames_buffer:
-        audio_data = sr.AudioData(b"".join(speech_frames_buffer), sample_rate, 2)
-        try:
-            text = recognizer.recognize_google(audio_data, language="en-IN")
-            return text
-        except sr.UnknownValueError:
-            st.error("⚠️ Could not understand speech.")
-        except sr.RequestError as e:
-            st.error(f"❌ Speech service unavailable: {e}")
-    else:
-        st.error("⚠️ No speech detected.")
-
-    return None
-
-
 
 
 # ----------------- UI HEADER -----------------
@@ -367,6 +294,32 @@ if "fallback_history" not in st.session_state:
     st.session_state.fallback_history = []
 if "last_fallback_qna" not in st.session_state:
     st.session_state.last_fallback_qna = None
+    
+# --- ✅ NEW: VOICE INPUT IN SIDEBAR ---
+st.sidebar.header("Voice Input")
+st.sidebar.write("Click the icon below to record your question.")
+wav_audio_data = st_audiorec(
+    icon_name="microphone-lines",
+    icon_size="2x",
+    neutral_color="#64748B",
+    recording_color="#E11D48",
+    )
+
+transcript = None
+if wav_audio_data:
+    st.sidebar.audio(wav_audio_data, format='audio/wav')
+    audio_bytes = io.BytesIO(wav_audio_data)
+    recognizer = sr.Recognizer()
+    try:
+        with sr.AudioFile(audio_bytes) as source:
+            audio = recognizer.record(source)
+        transcript = recognizer.recognize_google(audio, language="en-IN")
+        st.sidebar.success(f"You said: \"{transcript}\"")
+    except sr.UnknownValueError:
+        st.sidebar.error("⚠️ Speech was unclear. Please try again.")
+    except sr.RequestError:
+        st.sidebar.error("❌ Speech service unavailable. Check connection or type your question.")
+
 
 # ----------------- MIC BUTTON -----------------
 # Create a horizontal layout for mic + chat input
@@ -378,11 +331,10 @@ with st._bottom:
         mic_clicked = st.button("🎤", help="Speak your question", use_container_width=True)
     
 
-if mic_clicked:
-    transcript = capture_voice()
-    if transcript:
-        user_input = transcript
+user_input = st.chat_input("Ask a question...")
 
+if transcript:
+    user_input = transcript # Prioritize voice input
 if user_input and st.session_state.show_prompts:
     st.session_state.show_prompts = False
 
