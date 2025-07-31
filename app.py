@@ -10,8 +10,89 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 import speech_recognition as sr
-from st_audiorec import st_audiorec  # 💡 Import the browser-based audio recorder
 import io
+import threading
+from pydub import AudioSegment
+import webrtcvad
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, AudioProcessorBase
+
+
+# ----------------- VAD & AUDIO CONSTANTS -----------------
+VAD_AGGRESSIVENESS = 3  # How aggressive VAD is (0-3)
+SAMPLE_RATE = 16000     # 16k Hz is required by SpeechRecognition
+FRAME_DURATION = 30     # ms
+CHUNK_SIZE = int(SAMPLE_RATE * FRAME_DURATION / 1000)
+
+# ----------------- REAL-TIME AUDIO PROCESSOR CLASS -----------------
+class VADAudioProcessor(AudioProcessorBase):
+    def __init__(self) -> None:
+        self.vad = webrtcvad.Vad(VAD_AGGRESSIVENESS)
+        self.lock = threading.Lock()
+        self.speech_buffer = io.BytesIO()
+        self.is_speaking = False
+        self.silence_frames = 0
+
+    def _resample_and_convert(self, audio_chunk: AudioSegment) -> bytes:
+        """Ensure audio is 16k Hz mono for VAD."""
+        audio_chunk = audio_chunk.set_frame_rate(SAMPLE_RATE).set_channels(1)
+        return audio_chunk.raw
+
+    def recv(self, frame):
+        audio_segment = AudioSegment(
+            data=frame.to_ndarray(format="s16").tobytes(),
+            sample_width=frame.format.bytes,
+            frame_rate=frame.sample_rate,
+            channels=len(frame.layout.channels),
+        )
+        
+        processed_audio = self._resample_and_convert(audio_segment)
+        
+        with self.lock:
+            for i in range(0, len(processed_audio), CHUNK_SIZE * 2):
+                chunk = processed_audio[i:i + CHUNK_SIZE * 2]
+                if len(chunk) < CHUNK_SIZE * 2:
+                    break
+                
+                is_speech = self.vad.is_speech(chunk, SAMPLE_RATE)
+                
+                if self.is_speaking:
+                    self.speech_buffer.write(chunk)
+                    if not is_speech:
+                        self.silence_frames += 1
+                        if self.silence_frames * FRAME_DURATION > 1500:
+                            self.is_speaking = False
+                            self.finalize_speech()
+                    else:
+                        self.silence_frames = 0
+                elif is_speech:
+                    self.is_speaking = True
+                    self.silence_frames = 0
+                    self.speech_buffer.write(chunk)
+        
+        return frame
+
+    def finalize_speech(self):
+        """Called when speech ends. Transcribes the buffered audio."""
+        recognizer = sr.Recognizer()
+        self.speech_buffer.seek(0)
+        
+        if self.speech_buffer.getbuffer().nbytes == 0:
+            st.session_state.transcribed_text = ""
+            return
+
+        audio_data = sr.AudioData(
+            frame_data=self.speech_buffer.read(),
+            sample_rate=SAMPLE_RATE,
+            sample_width=2 # 16-bit
+        )
+        
+        try:
+            text = recognizer.recognize_google(audio_data, language="en-IN")
+            st.session_state.transcribed_text = text
+        except (sr.UnknownValueError, sr.RequestError):
+            st.session_state.transcribed_text = ""
+        
+        self.speech_buffer = io.BytesIO()
 
 
 # ----------------- CONFIG -----------------
@@ -295,56 +376,48 @@ if "fallback_history" not in st.session_state:
     st.session_state.fallback_history = []
 if "last_fallback_qna" not in st.session_state:
     st.session_state.last_fallback_qna = None
-# 💡 Add a new flag to control the recording state
-if 'is_recording' not in st.session_state:
-    st.session_state.is_recording = False
+# In your SESSION state block
+if "is_listening" not in st.session_state:
+    st.session_state.is_listening = False
+if "transcribed_text" not in st.session_state:
+    st.session_state.transcribed_text = None
 
 # Initialize user_input variable
 user_input = None
 
-# --- ✅ MODIFIED: INTEGRATED CHAT & VOICE INPUT ---
-# This block now controls the UI at the bottom of the page
+# --- NEW: REAL-TIME VAD INPUT UI ---
 with st._bottom:
-    if st.session_state.is_recording:
-        # --- RECORDING STATE ---
-        # Show the audio recorder
-        wav_audio_data = st_audiorec()
+    if st.session_state.is_listening:
+        # --- LISTENING STATE ---
+        st.info("🎤 Listening... I'll stop automatically when you pause.")
         
-        # A placeholder to show the recording status
-        st.info("Recording... Click the icon again to stop and process.")
-
-        if wav_audio_data:
-            # When audio is recorded, process it
-            audio_bytes = io.BytesIO(wav_audio_data)
-            recognizer = sr.Recognizer()
-            try:
-                with sr.AudioFile(audio_bytes) as source:
-                    audio = recognizer.record(source)
-                # Use the recognized text as user_input
-                user_input = recognizer.recognize_google(audio, language="en-IN")
-            except sr.UnknownValueError:
-                st.error("⚠️ Speech was unclear. Please try again or type your question.")
-            except sr.RequestError:
-                st.error("❌ Speech service unavailable. Please type your question.")
-            
-            # Reset the recording flag to return to the default text input UI
-            st.session_state.is_recording = False
-            st.rerun() # Rerun to immediately process the input and update the UI
-
+        webrtc_streamer(
+            key="vad_recorder",
+            mode=WebRtcMode.SEND_ONLY,
+            audio_processor_factory=VADAudioProcessor,
+            media_stream_constraints={"video": False, "audio": True},
+        )
+        
     else:
         # --- DEFAULT TEXT INPUT STATE ---
         cols = st.columns([0.9, 0.1])
         with cols[0]:
-            # Use a key to grab the input value
             user_input_text = st.chat_input("Ask a question...", key="chat_input")
             if user_input_text:
                 user_input = user_input_text
-
         with cols[1]:
-            # The mic button now just toggles the state
             if st.button("🎤", help="Speak your question", use_container_width=True):
-                st.session_state.is_recording = True
-                st.rerun() # Immediately rerun to show the recorder
+                st.session_state.is_listening = True
+                st.rerun()
+
+# Check if transcription has come back from the audio processor
+if st.session_state.transcribed_text is not None:
+    if st.session_state.transcribed_text: # Ensure it's not an empty string
+        user_input = st.session_state.transcribed_text
+    
+    st.session_state.transcribed_text = None  # Reset for next use
+    st.session_state.is_listening = False # Switch back to text input UI
+    st.rerun()
                 
                 
 if st.session_state.show_prompts:
