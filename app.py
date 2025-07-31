@@ -393,7 +393,7 @@ with st._bottom:
         
         webrtc_streamer(
             key="vad_recorder",
-            mode=WebRtcMode.SEND_ONLY,
+            mode=WebRtcMode.SENDONLY,
             audio_processor_factory=VADAudioProcessor,
             media_stream_constraints={"video": False, "audio": True},
         )
