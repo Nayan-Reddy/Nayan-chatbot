@@ -9,6 +9,46 @@ from dotenv import load_dotenv
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
+import sqlite3
+import uuid
+from datetime import datetime
+import time
+
+# ----------------- DATABASE SETUP -----------------
+@st.cache_resource
+def init_db():
+    """Initializes the SQLite database and 'interactions' table."""
+    conn = sqlite3.connect("chatbot_logs.db", check_same_thread=False)
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS interactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL,
+            timestamp DATETIME NOT NULL,
+            user_query TEXT NOT NULL,
+            bot_response TEXT NOT NULL,
+            response_source TEXT NOT NULL,
+            response_time_ms INTEGER NOT NULL
+        )
+    """)
+    conn.commit()
+    return conn
+
+# Initialize the database connection
+conn = init_db()
+
+def log_interaction(session_id, query, response, source, response_time_ms):
+    """Logs a single interaction to the database."""
+    timestamp = datetime.now()
+    try:
+        c = conn.cursor()
+        c.execute(
+            "INSERT INTO interactions (session_id, timestamp, user_query, bot_response, response_source, response_time_ms) VALUES (?, ?, ?, ?, ?, ?)",
+            (session_id, timestamp, query, response, source, response_time_ms)
+        )
+        conn.commit()
+    except Exception as e:
+        st.error(f"Database logging failed: {e}")
 
 
 # ----------------- CONFIG -----------------
@@ -175,6 +215,9 @@ st.markdown('<div class="subheader">Ask me anything about Nayan and his work!</d
 
 
 # ----------------- SESSION -----------------
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+    
 if "messages" not in st.session_state:
     st.session_state.messages = [{
         "role": "system", 
@@ -337,7 +380,11 @@ if user_input:
     st.markdown(f"<div class='user-bubble'>{user_input}</div>", unsafe_allow_html=True)
     st.session_state.messages = st.session_state.messages[:1]
     st.session_state.messages.append({"role": "user", "content": user_input})
-
+    # --- Start Logging Additions ---
+    start_time = time.time()
+    reply = ""
+    response_source = ""
+    # --- End Logging Additions ---
     if is_sensitive(user_input):
         reply = sensitive_reply(user_input)
     elif is_follow_up(user_input) and st.session_state.last_fallback_qna:
@@ -366,11 +413,10 @@ if user_input:
         else:
             with st.spinner("Thinking..."):
                 try:
-                    fallback_qna_context = [
-                        {"role": "user", "content": q} if i % 2 == 0 else {"role": "assistant", "content": a}
-                        for i, (q, a) in enumerate(st.session_state.fallback_history[-5:])
-                        for _ in (0, 1)
-                    ]
+                    fallback_qna_context = []
+                    for q, a in st.session_state.fallback_history[-5:]:
+                        fallback_qna_context.append({"role": "user", "content": q})
+                        fallback_qna_context.append({"role": "assistant", "content": a})
                     all_context = [st.session_state.messages[0]] + fallback_qna_context + st.session_state.messages[-5:]
                     response = client.chat.completions.create(
                         model=chat_model,
@@ -379,7 +425,18 @@ if user_input:
                     reply = response.choices[0].message.content
                 except Exception as e:
                     reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
-
+                    response_source = "error"
+    # --- Final Logging Step ---
+    end_time = time.time()
+    response_time_ms = int((end_time - start_time) * 1000)
+    log_interaction(
+        session_id=st.session_state.session_id,
+        query=user_input,
+        response=reply,
+        source=response_source,
+        response_time_ms=response_time_ms
+    )
+    # --- End Logging ---
     st.session_state.messages.append({"role": "assistant", "content": reply})
     max_pairs = 5
     system_message = st.session_state.messages[0]
