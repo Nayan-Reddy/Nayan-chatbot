@@ -74,30 +74,30 @@ def get_best_fallback(user_input):
 
     best_sim = 0
     best_answer = None
-
+    matched_question = None
     for q, vec, ans in fallback_embeddings:
         sim = cosine_similarity([user_vector.cpu().numpy()], [vec])[0][0]
         if sim > best_sim:
-            best_sim = sim
-            best_answer = ans
+            best_sim, best_answer, matched_question = sim, ans, q
 
-    if best_sim >= 0.82:
-        return best_answer
+    if best_sim >= 0.87: 
+        user_words = set(user_clean.split())
+        match_words = set(clean(matched_question).split())
+        common_words = user_words.intersection(match_words)
+
+        if len(common_words) > 0:
+            return best_answer
 
     best_fuzzy_score = 0
     fuzzy_answer = None
     for item in fallback_data:
         for q in item["questions"]:
             score = fuzz.token_sort_ratio(user_clean, clean(q))
-            if user_clean in clean(q) or clean(q) in user_clean:
-                score += 15
+            if user_clean in clean(q) or clean(q) in user_clean: score += 15
             if score > best_fuzzy_score:
-                best_fuzzy_score = score
-                fuzzy_answer = item["answer"]
-
-    if best_fuzzy_score >= 90:
-        return fuzzy_answer
-
+                best_fuzzy_score, fuzzy_answer = score, item["answer"]
+    
+    if best_fuzzy_score >= 90: return fuzzy_answer
     return None
 
 # ----------------- UI HEADER -----------------
