@@ -387,6 +387,7 @@ if user_input:
     # --- End Logging Additions ---
     if is_sensitive(user_input):
         reply = sensitive_reply(user_input)
+        response_source = "sensitive_filter"
     elif is_follow_up(user_input) and st.session_state.last_fallback_qna:
         last_q, last_a = st.session_state.last_fallback_qna
         context = [
@@ -401,12 +402,15 @@ if user_input:
                     messages=[st.session_state.messages[0]] + context
                 )
                 reply = response.choices[0].message.content
+                response_source = "llm_follow_up"
             except Exception as e:
                 reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
+                response_source = "error"
     else:
         fallback = get_best_fallback(user_input)
         if fallback:
             reply = fallback
+            response_source = "fallback"
             st.session_state.fallback_history.append((user_input, reply))
             st.session_state.fallback_history = st.session_state.fallback_history[-5:]
             st.session_state.last_fallback_qna = (user_input, fallback)
@@ -423,6 +427,7 @@ if user_input:
                         messages=all_context
                     )
                     reply = response.choices[0].message.content
+                    response_source = "llm_general"
                 except Exception as e:
                     reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
                     response_source = "error"
