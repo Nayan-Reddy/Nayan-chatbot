@@ -9,90 +9,6 @@ from dotenv import load_dotenv
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
-import speech_recognition as sr
-import io
-import threading
-from pydub import AudioSegment
-import webrtcvad
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, AudioProcessorBase
-
-
-# ----------------- VAD & AUDIO CONSTANTS -----------------
-VAD_AGGRESSIVENESS = 3  # How aggressive VAD is (0-3)
-SAMPLE_RATE = 16000     # 16k Hz is required by SpeechRecognition
-FRAME_DURATION = 30     # ms
-CHUNK_SIZE = int(SAMPLE_RATE * FRAME_DURATION / 1000)
-
-# ----------------- REAL-TIME AUDIO PROCESSOR CLASS -----------------
-class VADAudioProcessor(AudioProcessorBase):
-    def __init__(self) -> None:
-        self.vad = webrtcvad.Vad(VAD_AGGRESSIVENESS)
-        self.lock = threading.Lock()
-        self.speech_buffer = io.BytesIO()
-        self.is_speaking = False
-        self.silence_frames = 0
-
-    def _resample_and_convert(self, audio_chunk: AudioSegment) -> bytes:
-        """Ensure audio is 16k Hz mono for VAD."""
-        audio_chunk = audio_chunk.set_frame_rate(SAMPLE_RATE).set_channels(1)
-        return audio_chunk.raw
-
-    def recv(self, frame):
-        audio_segment = AudioSegment(
-            data=frame.to_ndarray(format="s16").tobytes(),
-            sample_width=frame.format.bytes,
-            frame_rate=frame.sample_rate,
-            channels=len(frame.layout.channels),
-        )
-        
-        processed_audio = self._resample_and_convert(audio_segment)
-        
-        with self.lock:
-            for i in range(0, len(processed_audio), CHUNK_SIZE * 2):
-                chunk = processed_audio[i:i + CHUNK_SIZE * 2]
-                if len(chunk) < CHUNK_SIZE * 2:
-                    break
-                
-                is_speech = self.vad.is_speech(chunk, SAMPLE_RATE)
-                
-                if self.is_speaking:
-                    self.speech_buffer.write(chunk)
-                    if not is_speech:
-                        self.silence_frames += 1
-                        if self.silence_frames * FRAME_DURATION > 1500:
-                            self.is_speaking = False
-                            self.finalize_speech()
-                    else:
-                        self.silence_frames = 0
-                elif is_speech:
-                    self.is_speaking = True
-                    self.silence_frames = 0
-                    self.speech_buffer.write(chunk)
-        
-        return frame
-
-    def finalize_speech(self):
-        """Called when speech ends. Transcribes the buffered audio."""
-        recognizer = sr.Recognizer()
-        self.speech_buffer.seek(0)
-        
-        if self.speech_buffer.getbuffer().nbytes == 0:
-            st.session_state.transcribed_text = ""
-            return
-
-        audio_data = sr.AudioData(
-            frame_data=self.speech_buffer.read(),
-            sample_rate=SAMPLE_RATE,
-            sample_width=2 # 16-bit
-        )
-        
-        try:
-            text = recognizer.recognize_google(audio_data, language="en-IN")
-            st.session_state.transcribed_text = text
-        except (sr.UnknownValueError, sr.RequestError):
-            st.session_state.transcribed_text = ""
-        
-        self.speech_buffer = io.BytesIO()
 
 
 # ----------------- CONFIG -----------------
@@ -183,9 +99,6 @@ def get_best_fallback(user_input):
         return fuzzy_answer
 
     return None
-
-# ----------------- VOICE INPUT FUNCTION -----------------
-
 
 # ----------------- UI HEADER -----------------
 st.markdown("""
@@ -370,58 +283,19 @@ if "messages" not in st.session_state:
         )
     }]
 
-if "show_prompts" not in st.session_state:
     st.session_state.show_prompts = True
 if "fallback_history" not in st.session_state:
     st.session_state.fallback_history = []
 if "last_fallback_qna" not in st.session_state:
     st.session_state.last_fallback_qna = None
-# In your SESSION state block
-if "is_listening" not in st.session_state:
-    st.session_state.is_listening = False
-if "transcribed_text" not in st.session_state:
-    st.session_state.transcribed_text = None
 
-# Initialize user_input variable
-user_input = None
 
-# --- NEW: REAL-TIME VAD INPUT UI ---
-with st._bottom:
-    if st.session_state.is_listening:
-        # --- LISTENING STATE ---
-        st.info("🎤 Listening... I'll stop automatically when you pause.")
-        
-        webrtc_streamer(
-            key="vad_recorder",
-            mode=WebRtcMode.SENDONLY,
-            audio_processor_factory=VADAudioProcessor,
-            media_stream_constraints={"video": False, "audio": True},
-            rtc_configuration={
-            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-        )
-        
-    else:
-        # --- DEFAULT TEXT INPUT STATE ---
-        cols = st.columns([0.9, 0.1])
-        with cols[0]:
-            user_input_text = st.chat_input("Ask a question...", key="chat_input")
-            if user_input_text:
-                user_input = user_input_text
-        with cols[1]:
-            if st.button("🎤", help="Speak your question", use_container_width=True):
-                st.session_state.is_listening = True
-                st.rerun()
+user_input = st.chat_input("Ask a question...")
 
-# Check if transcription has come back from the audio processor
-if st.session_state.transcribed_text is not None:
-    if st.session_state.transcribed_text: # Ensure it's not an empty string
-        user_input = st.session_state.transcribed_text
-    
-    st.session_state.transcribed_text = None  # Reset for next use
-    st.session_state.is_listening = False # Switch back to text input UI
-    st.rerun()
-                
-                
+
+if user_input and st.session_state.show_prompts:
+    st.session_state.show_prompts = False
+
 if st.session_state.show_prompts:
     st.markdown("""
     <div style='text-align: center; margin-bottom: 25px; color: #c9d1d9; font-size: 15px;'>
