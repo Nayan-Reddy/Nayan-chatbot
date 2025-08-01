@@ -9,46 +9,51 @@ from dotenv import load_dotenv
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
-import sqlite3
+import gspread
 import uuid
 from datetime import datetime
 import time
 
-# ----------------- DATABASE SETUP -----------------
+# ----------------- DATABASE SETUP (Google Sheets Version) -----------------
 @st.cache_resource
 def init_db():
-    """Initializes the SQLite database and 'interactions' table."""
-    conn = sqlite3.connect("chatbot_logs.db", check_same_thread=False)
-    c = conn.cursor()
-    c.execute("""
-        CREATE TABLE IF NOT EXISTS interactions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            session_id TEXT NOT NULL,
-            timestamp DATETIME NOT NULL,
-            user_query TEXT NOT NULL,
-            bot_response TEXT NOT NULL,
-            response_source TEXT NOT NULL,
-            response_time_ms INTEGER NOT NULL
-        )
-    """)
-    conn.commit()
-    return conn
+    """Initializes the connection to the Google Sheet."""
+    # Authenticate using Streamlit's secrets, which you set up in secrets.toml
+    gc = gspread.service_account_from_dict(st.secrets["gcp_service_account"])
+    
+    # Open the sheet by its exact name
+    spreadsheet = gc.open("Chatbot Logs") # <-- Make sure this name matches your Google Sheet's name
+    
+    # Select the first worksheet
+    worksheet = spreadsheet.sheet1
+    return worksheet
 
-# Initialize the database connection
-conn = init_db()
+# Initialize the connection
+worksheet = init_db()
 
 def log_interaction(session_id, query, response, source, response_time_ms):
-    """Logs a single interaction to the database."""
-    timestamp = datetime.now()
+    """Appends a single interaction as a new row in the Google Sheet."""
     try:
-        c = conn.cursor()
-        c.execute(
-            "INSERT INTO interactions (session_id, timestamp, user_query, bot_response, response_source, response_time_ms) VALUES (?, ?, ?, ?, ?, ?)",
-            (session_id, timestamp, query, response, source, response_time_ms)
-        )
-        conn.commit()
+        # Format the timestamp into a string to avoid timezone issues
+        timestamp_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # Get the current number of rows to create a simple ID
+        num_rows = len(worksheet.get_all_values())
+        
+        new_row = [
+            num_rows,  # Simple ID, starting from 0
+            session_id,
+            timestamp_str,
+            query,
+            response,
+            source,
+            response_time_ms
+        ]
+        
+        # Append the new row to the sheet
+        worksheet.append_row(new_row, value_input_option='USER_ENTERED')
     except Exception as e:
-        st.error(f"Database logging failed: {e}")
+        st.error(f"Google Sheets logging failed: {e}")
 
 
 # ----------------- CONFIG -----------------

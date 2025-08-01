@@ -6,8 +6,8 @@ python-dotenv
 numpy<2
 scikit-learn
 joblib
-streamlit-webrtc
-webrtcvad-wheels
-pydub
+gspread
+oauth2client
+google-auth-httplib2
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.2.2+cpu
