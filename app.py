@@ -373,19 +373,19 @@ logo_url = "https://raw.githubusercontent.com/Nayan-Reddy/Nayan-Resume/refs/head
 link_url = "https://nayan-reddy.github.io/Nayan-Resume/"
 brand_text = "Created by Nayan Reddy"
 
-
-# --- HTML & CSS & JS for the component ---
-branding_html = f"""
+# --- HTML & CSS & JS for the INLINE branding component ---
+inline_branding_html = f"""
 <style>
-    /* All the CSS you provided */
-    .branding {{
-        position: fixed;
-        bottom: 10px;
-        right: 16px;
-        z-index: 1000;
+    /* Main container for the inline logo */
+    .inline-branding {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px; /* Match height of the chat input bar */
+        width: 100%;
         cursor: pointer;
     }}
-    .branding a {{
+    .inline-branding a {{
         text-decoration: none;
     }}
     .branding-container {{
@@ -393,12 +393,12 @@ branding_html = f"""
         align-items: center;
         justify-content: flex-end;
         background-color: #f0f2f6;
-        border-radius: 25px; /* Pill shape */
-        height: 50px;
-        width: 50px;
+        border-radius: 25px;
+        height: 48px;
+        width: 48px; /* Starts collapsed */
         overflow: hidden;
         transition: width 0.4s ease-in-out;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }}
     .brand-text {{
         font-size: 14px;
@@ -410,21 +410,22 @@ branding_html = f"""
         transition: opacity 0.3s ease-in-out 0.1s;
     }}
     .brand-logo {{
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
         object-fit: cover;
         flex-shrink: 0;
         border-radius: 50%;
     }}
-    .branding.expanded .branding-container {{
+    /* Expanded state */
+    .inline-branding.expanded .branding-container {{
         width: 200px; /* Adjust as needed for your text */
     }}
-    .branding.expanded .brand-text {{
+    .inline-branding.expanded .brand-text {{
         opacity: 1;
     }}
 </style>
 
-<div class="branding" id="branding">
+<div class="inline-branding" id="branding">
     <a href="{link_url}" target="_blank">
         <div class="branding-container">
             <span class="brand-text">{brand_text}</span>
@@ -454,10 +455,15 @@ branding_html = f"""
 </script>
 """
 
-# --- Render the component in Streamlit ---
-components.html(branding_html, height=70)
-
-user_input = st.chat_input("Ask a question...")
+# --- Place Chat Input and Branding Logo at the bottom ---
+with st._bottom:
+    # We adjust the column widths to give the logo more space
+    cols = st.columns([0.85, 0.15]) 
+    with cols[0]:
+        user_input = st.chat_input("Ask a question...")
+    with cols[1]:
+        # Place the HTML component in the second column
+        components.html(inline_branding_html, height=60)
 
 
 if user_input and st.session_state.show_prompts:
