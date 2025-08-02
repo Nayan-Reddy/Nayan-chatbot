@@ -14,6 +14,7 @@ import uuid
 from datetime import datetime
 import time
 import spacy
+import streamlit.components.v1 as components
 
 # ----------------- DATABASE SETUP (Google Sheets Version) -----------------
 @st.cache_resource
@@ -366,6 +367,95 @@ if "fallback_history" not in st.session_state:
 if "last_fallback_qna" not in st.session_state:
     st.session_state.last_fallback_qna = None
 
+# --- CONFIGURABLE BRANDING ---
+# Replace these with your own details
+logo_url = "https://raw.githubusercontent.com/Nayan-Reddy/Nayan-Resume/refs/heads/main/n.png"
+link_url = "https://nayan-reddy.github.io/Nayan-Resume/"
+brand_text = "Created by Nayan Reddy"
+
+
+# --- HTML & CSS & JS for the component ---
+branding_html = f"""
+<style>
+    /* All the CSS you provided */
+    .branding {{
+        position: fixed;
+        bottom: 10px;
+        right: 16px;
+        z-index: 1000;
+        cursor: pointer;
+    }}
+    .branding a {{
+        text-decoration: none;
+    }}
+    .branding-container {{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: #f0f2f6;
+        border-radius: 25px; /* Pill shape */
+        height: 50px;
+        width: 50px;
+        overflow: hidden;
+        transition: width 0.4s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }}
+    .brand-text {{
+        font-size: 14px;
+        font-weight: 500;
+        color: #4f4f4f;
+        white-space: nowrap;
+        opacity: 0;
+        padding-right: 12px;
+        transition: opacity 0.3s ease-in-out 0.1s;
+    }}
+    .brand-logo {{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border-radius: 50%;
+    }}
+    .branding.expanded .branding-container {{
+        width: 200px; /* Adjust as needed for your text */
+    }}
+    .branding.expanded .brand-text {{
+        opacity: 1;
+    }}
+</style>
+
+<div class="branding" id="branding">
+    <a href="{link_url}" target="_blank">
+        <div class="branding-container">
+            <span class="brand-text">{brand_text}</span>
+            <img src="{logo_url}" class="brand-logo" alt="Logo">
+        </div>
+    </a>
+</div>
+
+<script>
+    const branding = document.getElementById('branding');
+    let hideTimeout;
+
+    function showBranding() {{
+        clearTimeout(hideTimeout);
+        branding.classList.add('expanded');
+        hideTimeout = setTimeout(() => {{
+            branding.classList.remove('expanded');
+        }}, 4000);
+    }}
+
+    // Initial animation on page load
+    setTimeout(showBranding, 1500);
+
+    // Re-trigger animation on hover or click
+    branding.addEventListener('mouseenter', showBranding);
+    branding.addEventListener('click', showBranding);
+</script>
+"""
+
+# --- Render the component in Streamlit ---
+components.html(branding_html, height=70)
 
 user_input = st.chat_input("Ask a question...")
 
