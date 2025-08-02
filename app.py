@@ -13,6 +13,7 @@ import gspread
 import uuid
 from datetime import datetime
 import time
+import spacy
 
 # ----------------- DATABASE SETUP (Google Sheets Version) -----------------
 @st.cache_resource
@@ -84,6 +85,32 @@ def load_embedder():
 
 embedder = load_embedder()
 
+@st.cache_resource
+def load_spacy_model():
+    """Loads the spaCy NER model."""
+    return spacy.load("en_core_web_sm")
+nlp = load_spacy_model()
+
+# Define the valid parts of your name at a broader scope
+VALID_NAME_PARTS = {"nayan", "reddy", "soma"}
+
+def contains_other_person_name(text, nlp_model):
+    """
+    Checks if the text contains a person's name that isn't related to Nayan Reddy Soma.
+    """
+    doc = nlp_model(text.lower())
+    for ent in doc.ents:
+        # Check if the entity is a person
+        if ent.label_ == "PERSON":
+            entity_text = ent.text
+            # Check if the found name contains any part of your full name
+            is_relevant_person = any(part in entity_text for part in VALID_NAME_PARTS)
+            
+            # If the person is not relevant, it's someone else
+            if not is_relevant_person:
+                return True
+    return False
+
 
 # ----------------- CLEAN + FILTER -----------------
 def clean(text):
@@ -113,8 +140,10 @@ def sensitive_reply(user_input):
         return "Let’s stay focused on Nayan’s professional background. Feel free to ask anything about his work, projects, or skills!"
 
 # ----------------- FALLBACK MATCH -----------------
-def get_best_fallback(user_input):
+def get_best_fallback(user_input, nlp_model):
     user_clean = clean(user_input)
+    if contains_other_person_name(user_input, nlp):
+        return None
     user_vector = embedder.encode([user_clean], convert_to_tensor=True)[0]
 
     best_sim = 0
@@ -412,7 +441,7 @@ if user_input:
                 reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
                 response_source = "error"
     else:
-        fallback = get_best_fallback(user_input)
+        fallback = get_best_fallback(user_input, nlp)
         if fallback:
             reply = fallback
             response_source = "fallback"
