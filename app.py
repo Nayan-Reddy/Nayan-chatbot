@@ -142,7 +142,7 @@ def sensitive_reply(user_input):
 # ----------------- FALLBACK MATCH -----------------
 def get_best_fallback(user_input, nlp_model):
     user_clean = clean(user_input)
-    if contains_other_person_name(user_input, nlp):
+    if contains_other_person_name(user_input, nlp_model):
         return None
     user_vector = embedder.encode([user_clean], convert_to_tensor=True)[0]
 
