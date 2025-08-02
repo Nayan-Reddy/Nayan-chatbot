@@ -411,60 +411,50 @@ def ask_gpt_with_context(user_input, fallback_context=None):
 # ----------------- PROCESS QUESTION -----------------
 if user_input:
     st.session_state.show_prompts = False
-    st.markdown(f"<div class='user-bubble'>{user_input}</div>", unsafe_allow_html=True)
-    st.session_state.messages = st.session_state.messages[:1]
+    
+    # Append the user's message to the single, unified chat history
     st.session_state.messages.append({"role": "user", "content": user_input})
-    # --- Start Logging Additions ---
+
+    # Display the user's message
+    st.markdown(f"<div class='user-bubble'>{user_input}</div>", unsafe_allow_html=True)
+    
+    # --- Start processing ---
     start_time = time.time()
     reply = ""
     response_source = ""
-    # --- End Logging Additions ---
+
+    # 1. First, check for sensitive content
     if is_sensitive(user_input):
         reply = sensitive_reply(user_input)
         response_source = "sensitive_filter"
-    elif is_follow_up(user_input) and st.session_state.last_fallback_qna:
-        last_q, last_a = st.session_state.last_fallback_qna
-        context = [
-            {"role": "user", "content": last_q},
-            {"role": "assistant", "content": last_a},
-            {"role": "user", "content": user_input}
-        ]
-        with st.spinner("Thinking..."):
-            try:
-                response = client.chat.completions.create(
-                    model=chat_model,
-                    messages=[st.session_state.messages[0]] + context
-                )
-                reply = response.choices[0].message.content
-                response_source = "llm_follow_up"
-            except Exception as e:
-                reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
-                response_source = "error"
     else:
-        fallback = get_best_fallback(user_input, nlp)
-        if fallback:
-            reply = fallback
+        # 2. Next, try to find a direct answer from local data
+        fallback_answer = get_best_fallback(user_input, nlp) # Pass nlp here
+        if fallback_answer:
+            reply = fallback_answer
             response_source = "fallback"
-            st.session_state.fallback_history.append((user_input, reply))
-            st.session_state.fallback_history = st.session_state.fallback_history[-5:]
-            st.session_state.last_fallback_qna = (user_input, fallback)
+        # 3. If no direct answer, use the LLM with the unified conversation history
         else:
             with st.spinner("Thinking..."):
                 try:
-                    fallback_qna_context = []
-                    for q, a in st.session_state.fallback_history[-5:]:
-                        fallback_qna_context.append({"role": "user", "content": q})
-                        fallback_qna_context.append({"role": "assistant", "content": a})
-                    all_context = [st.session_state.messages[0]] + fallback_qna_context + st.session_state.messages[-5:]
+                    # The context is now simply the last few messages in our unified history
+                    max_pairs = 5
+                    system_message = st.session_state.messages[0]
+                    chat_history = st.session_state.messages[1:]
+                    trimmed_history = chat_history[-(max_pairs * 2):]
+
+                    messages_to_send = [system_message] + trimmed_history
+                    
                     response = client.chat.completions.create(
                         model=chat_model,
-                        messages=all_context
+                        messages=messages_to_send
                     )
                     reply = response.choices[0].message.content
                     response_source = "llm_general"
                 except Exception as e:
-                    reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
+                    reply = f"❌ Apologies, I encountered an error. Please try again.\n\n**Error:** {e}"
                     response_source = "error"
+
     # --- Final Logging Step ---
     end_time = time.time()
     response_time_ms = int((end_time - start_time) * 1000)
