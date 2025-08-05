@@ -1,4 +1,6 @@
-# AI-Powered Chatbot 🤖
+<div align="center">
+  <h1>AI-Powered Chatbot 🤖</h1>
+</div>
 <div align="center">
 
 *An intelligent, self-aware AI chatbot that serves as a dynamic, interactive portfolio for a user, powered by a sophisticated RAG pipeline and advanced NLP.*
@@ -21,7 +23,7 @@
 </div>
 
 <p align="center">
-  <img src="[LINK TO YOUR CHATBOT GIF]" alt="Nayan's AI Assistant Demo GIF" width="800"/>
+  <img src="chatrecording.gif" alt="Nayan's AI Assistant Demo GIF" width="800"/>
 </p>
 
 <div align="center">
@@ -29,7 +31,7 @@
 </div>
   
 <p align="center">
-  <img src="[LINK TO YOUR ANALYTICS DASHBOARD GIF]" alt="Analytics Dashboard Demo GIF" width="800"/>
+  <img src="analytics%20recording.gif" alt="Analytics Dashboard Demo GIF" width="800"/>
 </p>
 
 ---
@@ -38,12 +40,11 @@
 
 - [Introduction](#-introduction)
 - [Core Features](#-core-features)
-- [Architecture & Tech Stack](#-tech-stack)
-- [Setup and Local Installation](#-getting-started)
+- [Architecture & Tech Stack](#️-architecture--tech-stack)
+- [Setup and Local Installation](#️-setup-and-local-installation)
 - [Environment Configuration](#-environment-configuration)
-- [Challenges & Learnings](#-challenges--learnings)
-- [Future Enhancements](#-future-enhancements)
-- [Contact](#-contact)
+- [Future Improvements](#-future-improvements)
+- [Get In Touch](#-get-in-touch)
 
 ---
 
@@ -180,23 +181,6 @@ The application requires two separate files for credentials:
 
 ---
 
-## 🧠 Challenges & Learnings
-
-This project involved solving several key challenges, leading to significant learnings:
-
-1.  **Challenge:** The initial bot would incorrectly answer questions about other people (e.g., "What are Akash's projects?").
-    - **Learning:** I evolved the solution from a simple, brittle keyword list to a sophisticated **NER-based guardrail using `spaCy`**. This taught me the power of using robust NLP models to create intelligent, context-aware application rules.
-
-2.  **Challenge:** How to monitor and log interactions on a deployed, serverless platform like Streamlit Cloud where local files are ephemeral.
-    - **Learning:** I designed and implemented a **real-time data pipeline** using the Google Sheets API. This involved understanding service account authentication, secure secrets management, and building a decoupled system where the live app acts as a data producer and a separate analytics app as a consumer.
-
-3.  **Challenge:** The bot's conversational memory was initially poor, relying on complex and unreliable logic to handle follow-ups.
-    - **Learning:** I refactored the state management by implementing a **unified chat history**. This simplified the codebase immensely and leveraged the inherent context-handling capabilities of the LLM, resulting in a much smarter and more natural conversational flow.
-
----
-
-
-
 ## 🔮 Future Improvements
 
 This project has a strong foundation that can be extended with even more features:
@@ -211,4 +195,4 @@ This project has a strong foundation that can be extended with even more feature
 
 I'm a passionate data enthusiast actively seeking opportunities in data analytics and AI. If you're impressed by this project or have any questions, I'd love to connect!
 
-* **Email:** [Your Email Address]
+* **Email:** <nayanreddy007@gmail.com>
