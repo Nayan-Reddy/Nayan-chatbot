@@ -110,7 +110,7 @@ To run this project on your local machine, follow these steps:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/Nayan-Reddy/Nayan-chatbot.git)
+    git clone https://github.com/Nayan-Reddy/Nayan-chatbot.git
     cd your-repo-name
     ```
 
