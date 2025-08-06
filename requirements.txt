@@ -1,7 +1,7 @@
 streamlit
 openai
-sentence-transformers==2.7.0
-transformers==4.36.2
+sentence-transformers==2.2.2
+transformers==4.26.1
 fuzzywuzzy[speedup]
 python-dotenv
 numpy<2
@@ -14,7 +14,6 @@ oauth2client
 google-auth-httplib2
 spacy>=3.7.0
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz#egg=en_core_web_sm
-# Direct links to force correct PyTorch installation for Python 3.10 on Linux
-https://download.pytorch.org/whl/cpu/torch-2.2.2%2Bcpu-cp310-cp310-linux_x86_64.whl
-https://download.pytorch.org/whl/cpu/torchvision-0.17.2%2Bcpu-cp310-cp310-linux_x86_64.whl
-safetensors
+# Direct links to a stable, compatible version of PyTorch (1.13.1) for Python 3.10
+https://download.pytorch.org/whl/cpu/torch-1.13.1%2Bcpu-cp310-cp310-linux_x86_64.whl
+https://download.pytorch.org/whl/cpu/torchvision-0.14.1%2Bcpu-cp310-cp310-linux_x86_64.whl
