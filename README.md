@@ -21,6 +21,7 @@
 <div align="center">
   <strong>Experience the chatbot in action: <a href="https://nayan-chatbot.streamlit.app/">➡️ Interact with the Live Demo Here</a></strong>
 </div>
+<br>
 
 <p align="center">
   <img src="chatrecording.gif" alt="Nayan's AI Assistant Demo GIF" width="800"/>
