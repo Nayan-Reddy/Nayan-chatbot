@@ -2,6 +2,7 @@ streamlit
 openai
 sentence-transformers==2.2.2
 transformers==4.26.1
+huggingface-hub==0.19.4
 fuzzywuzzy[speedup]
 python-dotenv
 numpy<2
