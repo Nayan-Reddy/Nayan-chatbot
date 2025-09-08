@@ -2,10 +2,10 @@
   {
     "questions": [
       "Tell me about yourself",
-      "Can you introduce yourself?",
+      "Can you introduce yourself",
       "Introduce yourself",
       "Please introduce yourself",
-      "Could you tell me a bit about yourself?",
+      "Could you tell me a bit about yourself",
       "Walk me through your background",
       "Give me a brief about yourself",
       "reduce yourself",
@@ -13,19 +13,28 @@
       "Who are you?",
       "Tell me about who you are",
       "Share a little about yourself",
-      "Can you share your background?",
-      "What can you tell me about yourself?",
-      "Tell me about Nayan",
-      "Can you tell me about Nayan Reddy?",
-      "Tell me about the candidate",
-      "Please introduce Nayan",
-      "Give me a brief about Nayan",
-      "Who is Nayan?",
-      "What can you tell me about the candidate?",
-      "Can you describe Nayan's background?"
+      "Can you share your background",
+      "What can you tell me about yourself"
+      
     ],
-    "answer": "My name is Nayan Reddy Soma, and I’m a data enthusiast with a strong foundation in analytics, data visualization, and automation. I recently completed my Bachelor's in Computer Science and Engineering, with a specialization in Artificial Intelligence and Machine Learning.\n\nOver the past few years, I’ve applied these skills through hands-on projects. One of the most impactful was building an interactive Expense Tracking System using Python (FastAPI), MySQL, and Streamlit. I implemented a session-based architecture so each user gets a private, real-time analytical view of their expenses.\n\nI also developed a full-scale Power BI project called Business 360, where I worked with 1.8M+ rows of data from both offline and online retail channels. I designed a snowflake schema, created advanced DAX measures, and built six dashboard pages tailored to Finance, Sales, Marketing, Supply Chain, and Executive stakeholders.\n\nAcross my projects, I’ve worked with over 3.5 million rows of data and covered domains like finance, operations, and consumer behavior. I’m confident with tools like Power BI, SQL, Python (especially Pandas), and Excel, and I’m passionate about turning raw data into meaningful business insights. I’m now looking to join a team where I can keep growing as a data analyst and contribute to solving real-world challenges."
+    "answer": "My name is Nayan Reddy Soma, and I’m a data enthusiast with a strong foundation in analytics, data visualization, and automation. I recently completed my Bachelor's in Computer Science and Engineering, with a specialization in Artificial Intelligence and Machine Learning.\n\nOver the past few years, I’ve applied these skills through hands-on projects. One of the most impactful was building an interactive Expense Tracking System using Python (FastAPI), MySQL, and Streamlit. I implemented a session-based architecture so each user gets a private, real-time analytical view of their expenses.\n\nI also developed a full-scale Power BI project called Business 360, where I worked with 1.8M+ rows of data from both offline and online retail channels. I designed a snowflake schema, created advanced DAX measures, and built six dashboard pages tailored to Finance, Sales, Marketing, Supply Chain, and Executive stakeholders.\n\nAcross my projects, I’ve worked with over 3.5 million rows of data and covered domains like finance, operations, and consumer behavior. I’m confident with tools like Power BI, SQL, Python (especially Pandas), and Excel, and I’m passionate about turning raw data into meaningful business insights. I’m now looking to join a team where I can keep growing as a data analyst and contribute to solving real-world challenges. You can checkout my Portfolio here [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma)"
   },
+  {
+  "questions": [
+    "Who is Nayan",
+    "Can you tell me about Nayan Reddy?",
+    "Tell me about the candidate",
+    "Please introduce Nayan",
+    "Give me a brief about Nayan",
+    "Tell me about Nayan",
+    "Can you give me an introduction to Nayan",
+    "Describe Nayan",
+    "What can you tell me about the candidate",
+    "Can you describe Nayan's background",
+    "What is Nayan's background"
+  ],
+  "answer": "Nayan Reddy Soma is a passionate and project-driven Data Analyst with a strong foundation in Computer Science, specializing in AI & Machine Learning.\n\nAfter achieving a 96.42 percentile in the CAT exam, he discovered his true passion lies not just in technology itself, but in using it to uncover business insights and communicate compelling stories through data. This led him to dedicate himself fully to a career in data analytics.\n\nWhile he doesn't have formal job experience, he has actively built a strong portfolio of real-world projects. His expertise is centered around **Power BI** for creating impactful dashboards, advanced **SQL** for deep data investigation, and **Python** for analysis. He's a proactive learner, passionate about helping businesses make better decisions, and is eager to join a team where he can grow and contribute."
+},
   {
     "questions": [
       "What are your strengths?",
@@ -709,6 +718,15 @@
     "Do you have any professional experience?",
     "Did you work during or after your studies?",
     "Have you been employed before?",
+    "What is his experience",
+    "what is nayans experience",
+    "where is he working",
+    "where is he working right now",
+    "Experience in years",
+    "what is his work experience",
+    "His experience",
+    "work experience",
+    "years of experience",
     "Do you have any past job experience?",
     "Have you ever worked in a professional setting?",
     "Did you ever intern or work part-time before?",
@@ -736,7 +754,7 @@
     "What kind of experience does Nayan have, if any?",
     "Does Nayan have relevant experience even without a full-time job?"
   ],
-  "answer": "As of now, I’m in the early stages of my career and don’t have formal work experience in a full-time professional setting. However, I’ve worked extensively on practical, real-world data analytics projects to develop and showcase my expertise.\n\nHere are some highlights of my experience through projects:\n\n• Power BI Expertise: Built a Business 360 Dashboard analyzing 1.8 million rows of sales and marketing data. It involved advanced DAX measures, ETL processes, and creating industry-standard visuals for stakeholders. The dashboard provided actionable insights on sales trends, profitability, and marketing ROI.\n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9).\n\n• SQL Proficiency: Conducted in-depth analysis of 1.4 million rows for a consumer goods database. Produced ad-hoc queries addressing business questions such as channel profitability, product growth, and churn analysis.\n\n• Python & Web Development: Built an Expense Tracker Application using FastAPI, Streamlit, and MySQL. It’s a fully functional app for personal finance management, complete with analytics dashboards, interactive charts, and automated user authentication.\n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/).\n\n• Advanced Excel: Designed division-level and category-level sales dashboards with slicers, trend analysis, and KPIs for business insights and reporting.\n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\n\nWhile I’m still building my professional track record, my hands-on experience with large datasets, dashboards, and actionable insights has equipped me to hit the ground running in data-driven roles.\n\nLet me know if you'd like more specifics about any of my projects or skills! 🙂"
+  "answer": "As of now, I’m in the early stages of my career and don’t have formal work experience in a full-time professional setting. However, I’ve worked extensively on practical, real-world data analytics projects to develop and showcase my expertise.\n\nHere are some highlights of my experience through projects:\n\n• My main project is this AI Assistant you're interacting with now. I engineered it as a full-stack application with a strong **data analytics** component at its core. A key feature is the **live analytics dashboard** I built, which tracks and visualizes user engagement and my own performance in real-time.\n\nTo power the conversation, I developed a sophisticated backend using Python. It features:\n\n* A **Hybrid Retrieval-Augmented Generation (RAG)** pipeline for providing precise, context-aware answers.\n* Intelligent **'Guardrails' using spaCy** for Named Entity Recognition to keep the conversation focused and professional.\n\nThis project showcases my ability to handle a complete project lifecycle—from designing a complex AI system to deploying it and, most importantly, analyzing its performance through data. [GitHub Repo](https://github.com/Nayan-Reddy/Nayan-chatbot)\n\n• Power BI Expertise: Built a Business 360 Dashboard analyzing 1.8 million rows of sales and marketing data. It involved advanced DAX measures, ETL processes, and creating industry-standard visuals for stakeholders. The dashboard provided actionable insights on sales trends, profitability, and marketing ROI.\n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights).\n\n• SQL Proficiency: Conducted in-depth analysis of 1.4 million rows for a consumer goods database. Produced ad-hoc queries addressing business questions such as channel profitability, product growth, and churn analysis.\n\n• Python & Web Development: Built an Expense Tracker Application using FastAPI, Streamlit, and MySQL. It’s a fully functional app for personal finance management, complete with analytics dashboards, interactive charts, and automated user authentication.\n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend).\n\n• SQL: The Consumer Goods project was an in-depth SQL challenge where I acted as a data analyst for an FMCG company. The goal was to solve 10 critical, real-world business problems by translating ad-hoc requests from management into actionable data insights.\n\nUsing MySQL, I wrote a series of complex queries to address questions related to:\n\n* **Market & Sales Performance:** Identifying top-performing products and analyzing weekly sales growth.\n* **Customer Insights:** Calculating Customer Lifetime Value (LTV) and performing cohort analysis to understand retention.\n* **Supply Chain:** Evaluating supplier on-time performance and managing inventory levels. [GitHub Repo](https://github.com/Nayan-Reddy/Consumer-goods)\n\n• Advanced Excel: Designed division-level and category-level sales dashboards with slicers, trend analysis, and KPIs for business insights and reporting.\n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\n\nWhile I’m still building my professional track record, my hands-on experience with large datasets, dashboards, and actionable insights has equipped me to hit the ground running in data-driven roles.\n\nLet me know if you'd like more specifics about any of my projects or skills! 🙂"
 },
 {
   "questions": [
@@ -1890,7 +1908,7 @@
     "Was your Power BI project based on real data?",
     "What was unique about your Power BI dashboard?"
   ],
-  "answer": "📊 **Power BI Project – Business 360 Dashboard**\n\nMy Power BI project is titled **“Business 360 Dashboard”**, a comprehensive business intelligence solution designed to analyze and visualize data across core business domains like Sales, Marketing, Finance, Supply Chain, and Executive Strategy.\n\n🔗 **View Live Dashboard:** [Power BI Business 360 Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9)\n\n---\n\n### 🧭 **Overview of the Project**\n\nThe Business 360 Dashboard simulates the operations of a real company using **1.8M+ rows of data**. It provides a bird’s-eye view of company performance, with drill-downs into specific departments or KPIs.\n\n---\n\n### 📌 **Department-Level Analysis**\n  \n- The **Financial View** displays P&L metrics like Gross Sales, Net Invoice Sales, Operating Costs, GM%, and Net Profit across a matrix  \n- The **Sales View** segmented performance by product and customer, using Gross Margin % and Net Sales as core KPIs.  \n- The **Marketing View** compared Category and Segment performance and calculated Net Profit % using dynamic DAX.  \n- The **Supply Chain View** focused on Forecast Accuracy, Net Error %, and Risk classification (e.g., Out-of-Stock or Excess Inventory).  \n- The **Executive View** highlighted market share (including AtliQ's Market Share), RC%, and a top-level business summary with dynamic toggling between dimensions.\n\n---\n\n### 🧩 **Key Features**\n\n1️⃣ **Dynamic Slicers & Drill-Downs** – Users can slice data by region, product, year, or customer segment and drill into granular details.  \n2️⃣ **Geographic Insights** – Location-based revenue heatmaps and regional KPIs.  \n3️⃣ **Advanced KPIs** – Net sales, gross margin, profit %, YoY growth, forecast error, etc.  \n4️⃣ **Custom DAX Measures** – Rolling averages, profitability ratios, and more.  \n5️⃣ **Interactive Visualizations** – Tree maps, bar charts, KPIs, scatter plots, custom tooltips.\n\n---\n\n### 🧮 **Data Modeling & Schema**\n\nBuilt on a **snowflake schema (18 interconnected tables which includes 6 fact tables)**:  \n- **Fact Tables:** Sales, actuals, forecasts etc.  \n- **Dimension Tables:** Products, customers, regions, time, channels, discounts, expense etc.  \nETL handled in Power Query: null handling, type corrections, filtering.\n\n---\n\n### ⚙️ **Tech Stack & Tools**\n\n- **Power BI Desktop** – Visual dashboard creation.  \n- **Power Query** – Data cleansing and transformation.  \n- **DAX** – Custom KPIs, calculated columns, time intelligence.\n\n---\n\nThe entire project was designed not just for data presentation, but for enabling **strategic decision-making** — giving a unified view of how each department contributes to the organization’s goals.\n\nIf you want to dive deeper into any part of the project — like **DAX measures**, **forecast analysis**, or **data modeling techniques** — feel free to ask! 😊"
+  "answer": "📊 **Power BI Project – Business 360 Dashboard**\n\nMy Power BI project is titled **“Business 360 Dashboard”**, a comprehensive business intelligence solution designed to analyze and visualize data across core business domains like Sales, Marketing, Finance, Supply Chain, and Executive Strategy.\n\n🔗 **View Live Dashboard:** [Power BI Business 360 Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights)\n\n---\n\n### 🧭 **Overview of the Project**\n\nThe Business 360 Dashboard simulates the operations of a real company using **1.8M+ rows of data**. It provides a bird’s-eye view of company performance, with drill-downs into specific departments or KPIs.\n\n---\n\n### 📌 **Department-Level Analysis**\n  \n- The **Financial View** displays P&L metrics like Gross Sales, Net Invoice Sales, Operating Costs, GM%, and Net Profit across a matrix  \n- The **Sales View** segmented performance by product and customer, using Gross Margin % and Net Sales as core KPIs.  \n- The **Marketing View** compared Category and Segment performance and calculated Net Profit % using dynamic DAX.  \n- The **Supply Chain View** focused on Forecast Accuracy, Net Error %, and Risk classification (e.g., Out-of-Stock or Excess Inventory).  \n- The **Executive View** highlighted market share (including AtliQ's Market Share), RC%, and a top-level business summary with dynamic toggling between dimensions.\n\n---\n\n### 🧩 **Key Features**\n\n1️⃣ **Dynamic Slicers & Drill-Downs** – Users can slice data by region, product, year, or customer segment and drill into granular details.  \n2️⃣ **Geographic Insights** – Location-based revenue heatmaps and regional KPIs.  \n3️⃣ **Advanced KPIs** – Net sales, gross margin, profit %, YoY growth, forecast error, etc.  \n4️⃣ **Custom DAX Measures** – Rolling averages, profitability ratios, and more.  \n5️⃣ **Interactive Visualizations** – Tree maps, bar charts, KPIs, scatter plots, custom tooltips.\n\n---\n\n### 🧮 **Data Modeling & Schema**\n\nBuilt on a **snowflake schema (18 interconnected tables which includes 6 fact tables)**:  \n- **Fact Tables:** Sales, actuals, forecasts etc.  \n- **Dimension Tables:** Products, customers, regions, time, channels, discounts, expense etc.  \nETL handled in Power Query: null handling, type corrections, filtering.\n\n---\n\n### ⚙️ **Tech Stack & Tools**\n\n- **Power BI Desktop** – Visual dashboard creation.  \n- **Power Query** – Data cleansing and transformation.  \n- **DAX** – Custom KPIs, calculated columns, time intelligence.\n\n---\n\nThe entire project was designed not just for data presentation, but for enabling **strategic decision-making** — giving a unified view of how each department contributes to the organization’s goals.\n\nIf you want to dive deeper into any part of the project — like **DAX measures**, **forecast analysis**, or **data modeling techniques** — feel free to ask! 😊"
 },
   {
     "questions": [
@@ -2070,7 +2088,7 @@
     "How does your expense tracker help in decision making?",
     "What tools and libraries did you use for analytics in your expense project?"
   ],
-  "answer": "My **Expense Tracker Management System** is a data-driven analytics project designed to help users make informed financial decisions. While it’s built using **FastAPI (backend)**, **Streamlit (frontend)**, and **MySQL (database)**, the true focus of the project lies in its **analytics and visualization capabilities**.\n\nI used **Pandas** extensively to clean, transform, and aggregate user-level expense and income data. For visual insights, I integrated **Matplotlib** and **Streamlit charts** to provide:\n\n- **Time-series trends** showing monthly spending vs income\n- **Top 5 expense categories** per month or overall\n- **Category-wise analysis** like Food, Travel, Utilities, etc.\n- **Spending heatmaps** and bar charts to identify high-cost areas\n- **Dynamic dashboards** that respond in real-time to user input\n\nEach user session is isolated using a **unique session ID**, allowing the app to provide **personalized insights** while also enabling a switch to demo mode when needed. This helped demonstrate session-based analytics — crucial in real-world multi-user environments.\n\nThe project simulates real user behavior by tracking detailed entries and turning them into actionable insights. This mirrors how analysts operate in companies — identifying overspending, setting budgets, spotting trends, and helping stakeholders take data-backed decisions.\n\nOverall, this project showcases my ability to work across the **data analysis pipeline**: from data collection and transformation to **interactive visual storytelling** and real-time analytics — using tools like **Pandas, SQL, Matplotlib, and Streamlit**.\n\n You can view try out the live app here \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/)\n\nIf you'd like to dive deeper — like **what kind of analysis my app offered**, **how I handled session isolation**, or **how analytics were implemented** — feel free to ask!"
+  "answer": "My **Expense Tracker Management System** is a data-driven analytics project designed to help users make informed financial decisions. While it’s built using **FastAPI (backend)**, **Streamlit (frontend)**, and **MySQL (database)**, the true focus of the project lies in its **analytics and visualization capabilities**.\n\nI used **Pandas** extensively to clean, transform, and aggregate user-level expense and income data. For visual insights, I integrated **Matplotlib** and **Streamlit charts** to provide:\n\n- **Time-series trends** showing monthly spending vs income\n- **Top 5 expense categories** per month or overall\n- **Category-wise analysis** like Food, Travel, Utilities, etc.\n- **Spending heatmaps** and bar charts to identify high-cost areas\n- **Dynamic dashboards** that respond in real-time to user input\n\nEach user session is isolated using a **unique session ID**, allowing the app to provide **personalized insights** while also enabling a switch to demo mode when needed. This helped demonstrate session-based analytics — crucial in real-world multi-user environments.\n\nThe project simulates real user behavior by tracking detailed entries and turning them into actionable insights. This mirrors how analysts operate in companies — identifying overspending, setting budgets, spotting trends, and helping stakeholders take data-backed decisions.\n\nOverall, this project showcases my ability to work across the **data analysis pipeline**: from data collection and transformation to **interactive visual storytelling** and real-time analytics — using tools like **Pandas, SQL, Matplotlib, and Streamlit**.\n\n You can view try out the live app here \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend)\n\nIf you'd like to dive deeper — like **what kind of analysis my app offered**, **how I handled session isolation**, or **how analytics were implemented** — feel free to ask!"
 },
   {
     "questions": [
@@ -2406,7 +2424,7 @@
       "Describe the ad-hoc insights SQL project",
       "What kind of SQL project did you work on?"
     ],
-    "answer": "Certainly! My SQL project was called\n\n 'Consumer Goods Analytics – Ad-hoc Insights'. It focused on analyzing a 1.4 million-row transactional dataset for a consumer goods company. I used MySQL to handle over 10 real-time business questions — from identifying top-performing products to analyzing sales by region, channels, and time. One highlight was discovering that the retailer channel alone accounted for 73.21% of total gross sales, helping the business prioritize its channel strategy. Another key finding was a 36.33% increase in unique products in 2021 compared to 2020, which supported their product expansion decisions. This project helped me translate vague business needs into structured queries and deliver fast, clear insights for leadership.\n\nIf you’d like to know more — such as **sample queries I wrote**, **what kind of ad-hoc requests I handled**, or **how I optimized performance** — feel free to ask! \n\nI've organized the queries which i used in my project under categories such as GROUP BY, RANK functions, WINDOW functions, Sales Drop, JOINs, and ROUND usage — just ask about any, and I’ll be happy to share!\n\nIf you want to know more about this project just ask 'Tell me more about this project'"
+    "answer": "Certainly. My key SQL project was 'Consumer Goods Analytics – Ad-hoc Insights,' where I analyzed a 1.4 million-row transactional dataset to solve over 10 real-world business problems for an FMCG company.\n\nUsing MySQL, I uncovered several critical insights for leadership. For example, I discovered that the **retailer channel alone drove 73.21% of gross sales**, providing a clear direction for their channel strategy. Another key finding was a **36.33% increase in unique products in 2021**, which validated their product expansion decisions.\n\nTo achieve this, I wrote a series of complex queries utilizing advanced techniques, including **Common Table Expressions (CTEs)** for readability, complex **JOINs**, and various **Window Functions** like RANK() and LAG() for sophisticated analysis. The project was a great demonstration of turning raw data into strategic advice.\n\nIf you're interested, feel free to dive deeper! You can ask about the **specific ad-hoc requests I handled**, the **types of window functions I used**, or even for a **sample query** \nYou can view the complete project and all the queries on my [GitHub](https://github.com/Nayan-Reddy/Consumer-goods)"
   },
   {
     "questions": [
@@ -2610,7 +2628,7 @@
     "What projects has he done?",
     "Explain Nayan projects"
   ],
-  "answer": "**Here's a detailed breakdown of the key projects I’ve done — focusing on Power BI, SQL, Python, and Excel, all aimed at solving real-world problems through data-driven insights:**\n\n---\n\n**1. Business 360 Dashboard (Power BI)**  |  [View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9)  \n**Tools Used**: Power BI, DAX, Snowflake Schema, Power Query  \n- **Summary**: Developed an all-encompassing dashboard with 1.8 million sales records, combining retail and e-commerce data for decision-making.  \n- **Key Features**:  \n   - Implemented snowflake database modeling for seamless data relationships.  \n   - Built advanced DAX measures for dynamic KPIs like Gross Margin %, YoY Growth, and Rolling Averages.  \n   - Fully interactive dashboard covering Sales, Supply Chain, Marketing, and Finance views.  \n- **Impact**:  \n   - Found top-performing regions/products driving 70%+ sales growth.  \n   - Improved forecast accuracy for supply chain planning.  \n\n---\n\n**2. Expense Tracker App (Python + MySQL)** | [Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/)  \n**Tools Used**: Python (NumPy, Pandas, Matplotlib, Seaborn), MySQL, FastAPI, Streamlit  \n- **Summary**: Designed a personal finance tracking web app where users could log, analyze, and visualize their spending habits.  \n- **Key Features**:  \n   - **Visualization and Analytics**: Used Pandas and Matplotlib to analyze and visualize the users data.  \n   - **Backend**: REST APIs via FastAPI and session-based authentication.  \n   - **Frontend**: Streamlit interface with charts like trend lines, pie/bar/category plots.  \n   - **Database**: CRUD-enabled MySQL backend storing expense data.  \n- **Impact**: Helped users track habits, analyze top spending categories, and visualize spending behavior.  \n[Try the App Here!]\n\n---\n\n**3. Consumer Goods Ad-Hoc Insights (SQL + Power BI)**  \n**Tools Used**: MySQL, Power BI  \n- **Summary**: Delivered data analytics insights on 1.4M+ consumer goods transactions using SQL and Power BI.  \n- **Key Contributions**:  \n   - Solved 10+ ad-hoc business problems, including:  \n     - RANK() on Top Products by region.  \n     - Retailer analysis (73.21% revenue).  \n     - Found 36.33% YoY increase in new launches.  \n   - Improved SQL query performance for better runtime.  \n- **Impact**: Enabled strategic decisions for product planning and channel investment.\n\n---\n\n**4. Product & Division Sales Dashboard (Excel)** | [Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)  \n**Tools Used**: Excel (Pivot Tables, Slicers, Conditional Formatting)  \n- **Summary**: Built a smart Excel dashboard to analyze product/division sales.  \n- **Key Features**:  \n   - Pivot-based dynamic charts and slicers.  \n   - Conditional formatting to highlight underperformance.  \n   - KPIs like YoY Growth, Profit Trends, and Moving Averages.  \n- **Impact**: Helped management identify low-margin divisions and track real-time sales performance.  \n[Explore Excel Project Here!]\n\n---\n\n**🧠 Skill Highlights from My Projects:**  \n• **Power BI**: Advanced DAX, Power Query ETL, complex visuals, multi-source integration.  \n• **SQL**: Grouping, Joins, RANK(), ROW_NUMBER(), optimized subqueries, transactional analytics.  \n• **Python**: FastAPI APIs, Streamlit dashboards, Pandas/Matplotlib for analysis.  \n• **Excel**: Pivot-based dynamic dashboards, automation, slicer-based analysis.\n\n---\n\n**📈 Total Impact**: Analyzed **over 3.5 million+ rows** of raw business data across domains like consumer goods, sales, operations, and finance — using modern tools and analytics best practices.\n\n🙋‍♂️ **Want to dive deeper?** Just ask things like:\n- \"What is your Power BI project?\"\n- \"Tell me about your SQL project\"\n- \"Explain your Expense Tracker app\"\n- \"Show your Excel dashboard\"\n\nHappy to explain further! 😊"
+  "answer": "**Here's a detailed breakdown of the key projects I’ve done — focusing on Power BI, SQL, Python, and Excel, all aimed at solving real-world problems through data-driven insights:**\n\n---\n\n1. **AI Assistant** with which you're currently interacting. I engineered it as a full-stack application with a strong **data analytics** component at its core. A key feature is the **live analytics dashboard** I built, which tracks and visualizes user engagement and my own performance in real-time.\n\nTo power the conversation, I developed a sophisticated backend using Python. It features:\n\n* A **Hybrid Retrieval-Augmented Generation (RAG)** pipeline for providing precise, context-aware answers.\n* Intelligent **'Guardrails' using spaCy** for Named Entity Recognition to keep the conversation focused and professional.\n\nThis project showcases my ability to handle a complete project lifecycle—from designing a complex AI system to deploying it and, most importantly, analyzing its performance through data. [GitHub Repo](https://github.com/Nayan-Reddy/Nayan-chatbot)\n\n---\n\n**2. Business 360 Dashboard (Power BI)**  |  [View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights)  \n**Tools Used**: Power BI, DAX, Snowflake Schema, Power Query  \n- **Summary**: Developed an all-encompassing dashboard with 1.8 million sales records, combining retail and e-commerce data for decision-making.  \n- **Key Features**:  \n   - Implemented snowflake database modeling for seamless data relationships.  \n   - Built advanced DAX measures for dynamic KPIs like Gross Margin %, YoY Growth, and Rolling Averages.  \n   - Fully interactive dashboard covering Sales, Supply Chain, Marketing, and Finance views.  \n- **Impact**:  \n   - Found top-performing regions/products driving 70%+ sales growth.  \n   - Improved forecast accuracy for supply chain planning.  \n\n---\n\n**3. Expense Tracker App (Python + MySQL)** | [Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend)  \n**Tools Used**: Python (NumPy, Pandas, Matplotlib, Seaborn), MySQL, FastAPI, Streamlit  \n- **Summary**: Designed a personal finance tracking web app where users could log, analyze, and visualize their spending habits.  \n- **Key Features**:  \n   - **Visualization and Analytics**: Used Pandas and Matplotlib to analyze and visualize the users data.  \n   - **Backend**: REST APIs via FastAPI and session-based authentication.  \n   - **Frontend**: Streamlit interface with charts like trend lines, pie/bar/category plots.  \n   - **Database**: CRUD-enabled MySQL backend storing expense data.  \n- **Impact**: Helped users track habits, analyze top spending categories, and visualize spending behavior.  \n\n---\n\n**4. Consumer Goods Ad-Hoc Insights (SQL + Power BI)**  [GitHub Repo](https://github.com/Nayan-Reddy/Consumer-goods)\n**Tools Used**: MySQL, Power BI  \n- **Summary**: Delivered data analytics insights on 1.4M+ consumer goods transactions using SQL and Power BI.  \n- **Key Contributions**:  \n   - Solved 10+ ad-hoc business problems, including:  \n     - RANK() on Top Products by region.  \n     - Retailer analysis (73.21% revenue).  \n     - Found 36.33% YoY increase in new launches.  \n   - Improved SQL query performance for better runtime.  \n- **Impact**: Enabled strategic decisions for product planning and channel investment.\n\n---\n\n**5. Product & Division Sales Dashboard (Excel)** | [Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)  \n**Tools Used**: Excel (Pivot Tables, Slicers, Conditional Formatting)  \n- **Summary**: Built a smart Excel dashboard to analyze product/division sales.  \n- **Key Features**:  \n   - Pivot-based dynamic charts and slicers.  \n   - Conditional formatting to highlight underperformance.  \n   - KPIs like YoY Growth, Profit Trends, and Moving Averages.  \n- **Impact**: Helped management identify low-margin divisions and track real-time sales performance.  \n[Explore Excel Project Here!]\n\n---\n\n**🧠 Skill Highlights from My Projects:**  \n• **Power BI**: Advanced DAX, Power Query ETL, complex visuals, multi-source integration.  \n• **SQL**: Grouping, Joins, RANK(), ROW_NUMBER(), optimized subqueries, transactional analytics.  \n• **Python**: FastAPI APIs, Streamlit dashboards, Pandas/Matplotlib for analysis.  \n• **Excel**: Pivot-based dynamic dashboards, automation, slicer-based analysis.\n\n---\n\n**📈 Total Impact**: Analyzed **over 3.5 million+ rows** of raw business data across domains like consumer goods, sales, operations, and finance — using modern tools and analytics best practices.\n\n🙋‍♂️ **You can check out my Portfolio here [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma)\n\n **Want to dive deeper?** Just ask things like:\n- \"What is your Power BI project?\"\n- \"Tell me about your SQL project\"\n- \"Explain your Expense Tracker app\"\n- \"Show your Excel dashboard\"\n\nHappy to explain further! 😊"
 },
 {
   "questions": [
@@ -2634,8 +2652,191 @@
     "Where can I explore your dashboards?",
     "Do you have any interactive projects?"
   ],
-  "answer": "Absolutely! Here are a few of my live project demos that you can explore:\n\n🔹 **Power BI Project – Business 360 Dashboard**  \n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9)\nAn interactive dashboard built on 1.8M+ rows across sales, marketing, supply chain, and executive views using DAX and snowflake modeling.\n\n🔹 **Expense Tracker App – Built with FastAPI + Streamlit**  \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/)\nA live session-based financial tracker with real-time analytics and visualizations built using Pandas, Matplotlib, Plotly, MySQL, and FastAPI.\n\n🔹 **Excel Dashboard – Division/Product Performance**  \n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\nAn Excel-based dashboard with product and division-wise analytics using pivot tables, slicers, and interactive visuals.\n\n🔹 **SQL Project – Consumer goods Analytics**  \nI don't have a live demo for my SQL project but i can explain my SQL project and show you queries that I have used. Just say Explain SQL project or Show sample queries, and I’ll be happy to share!\n\nLet me know if you’d like more details about any of these projects or the tech stack used! Just say explain Power BI project"
+  "answer": "Absolutely! Here are a few of my live project demos that you can explore:\n\n🔹 **Power BI Project – Business 360 Dashboard**  \n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights)\nAn interactive dashboard built on 1.8M+ rows across sales, marketing, supply chain, and executive views using DAX and snowflake modeling.\n\n🔹 **Expense Tracker App – Built with FastAPI + Streamlit**  \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend)\nA live session-based financial tracker with real-time analytics and visualizations built using Pandas, Matplotlib, Plotly, MySQL, and FastAPI.\n\n🔹 **Excel Dashboard – Division/Product Performance**  \n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\nAn Excel-based dashboard with product and division-wise analytics using pivot tables, slicers, and interactive visuals.\n\n🔹 **SQL Project – Consumer goods Analytics** [GitHub Repo](https://github.com/Nayan-Reddy/Consumer-goods)\nI don't have a live demo for my SQL project but i can explain my SQL project and show you queries that I have used. Just say Explain SQL project or Show sample queries, and I’ll be happy to share!\n\n**You can check out my Portfolio here [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma)\n\nLet me know if you’d like more details about any of these projects or the tech stack used! Just say explain Power BI project"
+},
+{
+  "questions": [
+    "Can I see your resume?",
+    "Could you share your resume?",
+    "Do you have a resume I can look at?",
+    "Where can I find your resume?",
+    "Send me your resume.",
+    "resume",
+    "Can I have a copy of your CV?",
+    "What are the highlights of your resume?",
+    "Can you give me a summary of your resume?",
+    "Provide me with your resume.",
+    "Do you have a link to your resume?",
+    "Can I see Nayan's resume?",
+    "Could you share Nayan's resume?",
+    "Does Nayan have a resume I can look at?",
+    "Where can I find Nayan's resume?",
+    "Send me Nayan's resume.",
+    "Can I have a copy of Nayan's CV?",
+    "What are the highlights of Nayan's resume?",
+    "Can you give me a summary of Nayan's resume?",
+    "Provide me with Nayan's resume.",
+    "Do you have a link to Nayan's resume?"
+  ],
+  "answer": "Absolutely! You can view and download my complete resume from here: [Resume](https://nayan-reddy.github.io/Nayan-Resume/).\n It provides a detailed look at my skills, project experience, and educational qualifications. If you have questions about a specific part of it, feel free to ask!"
+},
+{
+  "questions": [
+    "What is your GitHub profile?",
+    "Can you share your GitHub link?",
+    "Do you have a GitHub profile?",
+    "Github",
+    "Github profile",
+    "Where can I find your GitHub?",
+    "Show me your GitHub account.",
+    "What's your GitHub username?",
+    "Can I see your projects on GitHub?",
+    "Do you have a code repository I can see?",
+    "Where do you host your projects?",
+    "Could you provide a link to your GitHub?",
+    "What is Nayan's GitHub profile?",
+    "Can you share Nayan's GitHub link?",
+    "Does Nayan have a GitHub profile?",
+    "Where can I find Nayan's GitHub?",
+    "Show me Nayan's GitHub account.",
+    "What is Nayan's GitHub username?",
+    "Can I see Nayan's projects on GitHub?",
+    "Where does Nayan host his projects?",
+    "Could you provide a link to Nayan's GitHub?"
+  ],
+  "answer": "You can find all my public projects and contributions on my [GitHub profile](https://github.com/Nayan-Reddy). It's the best place to see my coding style and explore the source code for the projects I've worked on. Feel free to browse through my repositories!"
+},
+{
+  "questions": [
+    "Can I see your portfolio?",
+    "Do you have a portfolio?",
+    "Where can I find your portfolio?",
+    "Could you share a link to your portfolio website?",
+    "Show me your work.",
+    "Portfolio",
+    "Do you have a website",
+    "website",
+    "Can I see some of your projects?",
+    "Where can I view examples of your work?",
+    "Do you have any work samples?",
+    "Can you showcase some of your key projects?",
+    "Where is the collection of your best work?",
+    "Can I see Nayan's portfolio?",
+    "Does Nayan have a portfolio?",
+    "Where can I find Nayan's portfolio?",
+    "Could you share a link to Nayan's portfolio website?",
+    "Show me Nayan's work.",
+    "Can I see some of Nayan's projects?",
+    "Where can I view examples of Nayan's work?",
+    "Does Nayan have any work samples?",
+    "Can you showcase some of Nayan's key projects?"
+  ],
+  "answer": "Certainly! My portfolio is the best place to see my skills in action. You can explore it here: [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma). It features a curated selection of my key projects, complete with detailed case studies, methodologies, and links to the source code. Feel free to dive in, and let me know if you'd like to discuss a specific project in more detail!"
+},
+{
+  "questions": [
+    "How can I contact you?",
+    "What are your contact details?",
+    "How can I get in touch with you?",
+    "What is the best way to reach you?",
+    "Can I have your email address?",
+    "email",
+    "email address",
+    "phone number",
+    "contact number",
+    "contact info",
+    "mobile number",
+    "Do you have a phone number I can call?",
+    "What is your LinkedIn profile URL?",
+    "How can I connect with you?",
+    "Are you available for a quick chat or call?",
+    "Can you share your contact info?",
+    "How can I contact Nayan?",
+    "What are Nayan's contact details?",
+    "How do I get in touch with Nayan?",
+    "What is the best way to reach Nayan?",
+    "Can I have Nayan's email address?",
+    "What is Nayan's phone number?",
+    "How can I connect with Nayan on LinkedIn?",
+    "How can I schedule a meeting with Nayan?"
+  ],
+  "answer": "Of course. For any inquiries, reach out to me via email at [nayanreddy007@gmail.com] or you can contact me on my number **9177719157**. I look forward to connecting with you!"
+},
+{
+  "questions": [
+    "Hi",
+    "Hey",
+    "Hello",
+    "Hi nayan",
+    "hi nayan reddy",
+    "hey nayan",
+    "hi chatbot",
+    "hi assistant",
+    "Hey there",
+    "Hi there",
+    "Greetings",
+    "Good morning",
+    "Good afternoon",
+    "Good evening",
+    "Yo",
+    "What's up",
+    "Howdy",
+    "Sup",
+    "Hii",
+    "Heyy",
+    "Helo",
+    "Start",
+    "Are you there?",
+    "Can you help me?"
+  ],
+  "answer": "Hi there! I'm Nayan's AI assistant, ready to answer questions about his professional background. I can help you with questions about his resume, projects, skills, personality and many more. What would you like to know?"
+},
+{
+  "questions": [
+    "Tell me about your chatbot project.",
+    "Can you explain the AI assistant project?",
+    "What is the Nayan-chatbot on your GitHub?",
+    "How did you build your portfolio chatbot?",
+    "Describe the architecture of your AI assistant.",
+    "What technologies did you use for the chatbot?",
+    "Tell me about a complex project you built.",
+    "Tell me about Nayan's chatbot project.",
+    "How did Nayan build his portfolio chatbot?",
+    "What is the architecture of Nayan's AI assistant?"
+  ],
+  "answer": "I am that project! I'm a full-stack AI assistant built to serve as an interactive portfolio.\n\nThe core of my system is an advanced **Hybrid Retrieval-Augmented Generation (RAG)** pipeline. When you ask a question, I first use semantic search to find the most accurate answer from a knowledge base. If that's not a perfect match, I use fuzzy matching as a backup. Only if neither can answer do I fall back on a generative model (GPT-4o).\n\nTo ensure our conversations stay on topic, I have **'Intelligent Guardrails'** built with **spaCy** for Named Entity Recognition. This helps me recognize and filter out-of-scope or sensitive questions.\n\nFrom a technical perspective, my frontend is built with **Streamlit**, and the entire backend logic is in Python. One of my key features is a **real-time analytics pipeline** that logs user interactions to a Google Sheet, which then feeds a live dashboard to visualize my performance and user engagement. You can explore the complete source code on GitHub. [GitHub Repo](https://github.com/Nayan-Reddy/Nayan-chatbot) [Analytics Dashboard](https://nayan-chatbot-analytics.streamlit.app/)"
+},
+{
+  "questions": [
+    "What is your daily routine?",
+    "Describe your typical day.",
+    "What does your day usually look like?",
+    "How do you spend your day?",
+    "What's your daily schedule?",
+    "Can you walk me through your day?",
+    "What is Nayan's daily routine?",
+    "Describe Nayan's typical day.",
+    "How does Nayan usually spend his day?",
+    "What is Nayan's daily schedule like?"
+  ],
+  "answer": "My days are a structured blend of focused learning, hands-on application, and staying active.\n\nI dedicate my mornings to learning, whether it's diving into new machine learning concepts, mastering a Python library, or studying for a certification. I find this is when I'm most effective at absorbing new information.\n\nAfternoons are all about putting that knowledge into practice. This is my prime time for coding, working on personal projects like this AI assistant, or solving complex data problems.\n\nIn the evenings, I make sure to step away from the screen. I enjoy going for a run or playing badminton, which helps me clear my head and stay energized. Later, I'll often catch up on tech blogs or industry news to stay current. This routine helps me maintain a healthy balance between deep work and physical activity."
+},
+{
+  "questions": [
+    "What are your technical skills?",
+    "What technologies are you proficient in?",
+    "Can you list your skills?",
+    "What programming languages do you know?",
+    "What tools and technologies do you use?",
+    "Tell me about your tech stack.",
+    "What are your areas of expertise?",
+    "Show me your skills.",
+    "What are Nayan's technical skills?",
+    "What technologies is Nayan proficient in?",
+    "Can you list Nayan's skills?",
+    "What programming languages does Nayan know?"
+  ],
+  "answer": "Certainly. I have a comprehensive skill set that spans across data analytics, machine learning, and application development. Here is a detailed breakdown:\n\n**Programming & Databases:**\n* **Python:** Highly proficient for data science, backend development, and building AI systems.\n* **SQL:** Excellent command of complex queries and data manipulation, primarily with **MySQL**.\n\n**Business Intelligence & Visualization:**\n* **Power BI:** Designing and building interactive dashboards for business analytics.\n* **DAX:** Writing complex Data Analysis Expressions for advanced calculations in Power BI.\n* **Python Libraries:** Matplotlib, Seaborn, and Plotly for creating insightful visualizations.\n\n**Data Science & AI:**\n* **Data Manipulation & Analysis:** NumPy, Pandas\n* **Machine Learning:** Scikit-learn for building predictive models.\n* **NLP & AI Architecture:** spaCy, Sentence-Transformers, and hands-on experience designing and implementing **Retrieval-Augmented Generation (RAG)** pipelines.\n\n**Backend, MLOps & Developer Tools:**\n* **Web Frameworks:** **Streamlit** for data apps and **FastAPI** for building robust APIs.\n* **MLOps:** **MLflow** for managing the end-to-end machine learning lifecycle.\n* **Version Control:** Git & GitHub for collaborative development."
 }
-
 
 ]

@@ -19,4 +19,4 @@ for item in fallback_data:
 # Save the embeddings as .pkl
 joblib.dump(embeddings, "fallback_embeddings.pkl")
 
-print("✅ Embeddings generated and saved to fallback_embeddings.pkl")
+print("Embeddings generated and saved to fallback_embeddings.pkl")

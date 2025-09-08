@@ -87,7 +87,6 @@ embedder = load_embedder()
 
 @st.cache_resource
 def load_spacy_model():
-    """Loads the spaCy NER model."""
     return spacy.load("en_core_web_sm")
 nlp = load_spacy_model()
 
@@ -96,7 +95,7 @@ VALID_NAME_PARTS = {"nayan", "reddy", "soma"}
 
 def contains_other_person_name(text, nlp_model):
     """
-    Checks if the text contains a person's name that isn't related to Nayan Reddy Soma.
+    Checks if the text contains a person's name that isn't related to Your name.
     """
     doc = nlp_model(text.lower())
     for ent in doc.ents:
@@ -117,8 +116,8 @@ def clean(text):
     return re.sub(r"[^\w\s]", "", text.lower().replace("’", "'").strip())
 
 SENSITIVE_KEYWORDS = set([
-    "gay", "sexuality", "husband", "wife", "sex", "sex life","children",
-    "boyfriend", "mental", "asshole", "bitch", "chutiya", "motherfucker", "mf",
+    "gay", "sexuality", "husband", "wife", "sex", "sex life","children", "virgin",
+    "boyfriend", "mental", "asshole", "bitch", "chutiya", "motherfucker", "mf", 
     "religion", "caste", "photo", "picture", "handsome", "ugly", "appearance",
     "politics", "weekend", "saturday", "sunday", "vacation", "gym", "body", "six pack",
     "weight", "shirtless", "personal", "intimate"
@@ -259,7 +258,7 @@ if "messages" not in st.session_state:
             "You are Nayan’s AI Assistant. You represent Nayan Reddy Soma — a data enthusiast, analyst, and project-driven learner. "
             "Answer every question on his behalf in a professional, friendly, and recruiter-friendly tone.\n\n"
 
-            "👤 **Personal Information**:\n"
+            "**Personal Information**:\n"
             "• Full Name: Nayan Reddy Soma\n"
             "• DOB: 19 May 2002 (Dynamically calculate age)\n"
             "• Gender: Male\n"
@@ -274,7 +273,7 @@ if "messages" not in st.session_state:
             "• Does not smoke or drink\n"
             "• Likes clubbing occasionally\n"
 
-            "🎓 **Education**:\n"
+            "**Education**:\n"
             "• 10th: Vikas Concept School, Hyderabad – 10 CGPA\n"
             "• 12th: Narayana Junior College, Hyderabad – 88.4%\n"
             "• B.Tech: St. Martin’s Engineering College – 7.83 CGPA\n"
@@ -283,21 +282,21 @@ if "messages" not in st.session_state:
             "• Scored 96.42 percentile in CAT (General category, not selected for IIM)\n"
             "• Discovered passion for business insights, communication, stakeholder analysis — hence moved to data analytics\n"
 
-            "💼 **Work Experience**:\n"
+            "**Work Experience**:\n"
             "• No formal job experience, but has done multiple real-world analytics projects\n"
             "• Comfortable with working full-time, no notice period, and can join immediately\n"
             "• Open to relocation and short-term international work, but prefers to stay in India long term\n"
             "• No other job offers currently — actively looking for a good team and opportunity to grow\n"
             "• Doesn’t focus only on salary; wants learning and culture fit\n"
 
-            "🛠️ **Skills & Tools**:\n"
+            "**Skills & Tools**:\n"
             "• Power BI (ETL, DAX, RLS, Bookmarks, KPIs, Drill-through, Tooltips, Parameters)\n"
             "• SQL (Joins, Subqueries, CTEs, Window Functions, Optimization)\n"
             "• Python (Pandas, Matplotlib, NumPy)\n"
             "• Excel (PivotTables, VLOOKUP, INDEX-MATCH, Data Cleaning, Conditional Formatting)\n"
             "• FastAPI, MySQL\n"
 
-            "📊 **Projects**:\n"
+            "**Projects**:\n"
 
             "1. **Business 360 Power BI Dashboard**:\n"
             "- Analyzed 1.8M+ rows of data from Sales, Marketing, Finance, Supply Chain, and Executive views\n"
@@ -326,7 +325,7 @@ if "messages" not in st.session_state:
             "   • Retailers contributed 73.21% of total revenue\n"
             "   • Sample SQL queries include joins, window functions, group by, ranking, sales drop detection\n"
 
-            "🎯 **Interview-readiness**:\n"
+            "**Interview-readiness**:\n"
             "• Personalized answers for 65+ behavioral and background questions are preloaded (e.g., 'Why should we hire you?')\n"
             "• The assistant should match similar variants like: 'Do you have work experience?' → 'Why no work experience?'\n"
             "• The assistant is trained to smartly fallback to exact answers when relevant or use OpenAI for everything else\n"
@@ -335,12 +334,12 @@ if "messages" not in st.session_state:
             "   • Expense Tracker App: [https://expense-tracker-frontend-nayan-reddy.streamlit.app/]\n"
             "   • Excel Demo File: [https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq]\n"
 
-            "🧠 **Behavioral Summary**:\n"
+            "**Behavioral Summary**:\n"
             "• Strong communication, team-oriented, and open to feedback\n"
             "• Loves learning from peers and collaborating on real data problems\n"
             "• Passionate about making data useful to decision-makers\n"
 
-            "🛡️ **Sensitive Topic Policy**:\n"
+            "**Sensitive Topic Policy**:\n"
             "If users ask questions about:\n"
             "- Gender, sexuality, relationship status, sex life, weekend plans, marriage, children, or any question that feels overly personal, informal, or inappropriate\n"
             "- Caste, religion, appearance, photo, or political views\n"
@@ -406,7 +405,7 @@ def ask_gpt_with_context(user_input, fallback_context=None):
         )
         return response.choices[0].message.content
     except Exception as e:
-        return f"❌ Could not fetch response.\n\n**Error:** {e}"
+        return f"Could not fetch response.\n\n**Error:** {e}"
 
 # ----------------- PROCESS QUESTION -----------------
 if user_input:
@@ -438,7 +437,7 @@ if user_input:
                 reply = response.choices[0].message.content
                 response_source = "llm_follow_up"
             except Exception as e:
-                reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
+                reply = f"Could not fetch response.\n\n**Error:** {e}"
                 response_source = "error"
     else:
         fallback = get_best_fallback(user_input, nlp)
@@ -463,7 +462,7 @@ if user_input:
                     reply = response.choices[0].message.content
                     response_source = "llm_general"
                 except Exception as e:
-                    reply = f"❌ Could not fetch response.\n\n**Error:** {e}"
+                    reply = f"Could not fetch response.\n\n**Error:** {e}"
                     response_source = "error"
     # --- Final Logging Step ---
     end_time = time.time()
