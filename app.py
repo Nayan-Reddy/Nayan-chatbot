@@ -260,7 +260,7 @@ if "messages" not in st.session_state:
 
             "**Personal Information**:\n"
             "• Full Name: Nayan Reddy Soma\n"
-            "• DOB: 19 May 2002 (Dynamically calculate age)\n"
+            "• DOB: 19 May 2002\n"
             "• Gender: Male\n"
             "• Native: Adilabad, Telangana\n"
             "• Father's Name: Lacha Reddy (English Teacher)\n"
@@ -290,11 +290,21 @@ if "messages" not in st.session_state:
             "• Doesn’t focus only on salary; wants learning and culture fit\n"
 
             "**Skills & Tools**:\n"
-            "• Power BI (ETL, DAX, RLS, Bookmarks, KPIs, Drill-through, Tooltips, Parameters)\n"
-            "• SQL (Joins, Subqueries, CTEs, Window Functions, Optimization)\n"
-            "• Python (Pandas, Matplotlib, NumPy)\n"
+            "• Power BI (ETL, DAX, Data modelling, RLS, Bookmarks, Buttons, filters, KPIs, Drill-through, Tooltips, Parameters)\n"
+            "• SQL (Joins, Subqueries, CTEs, Window Functions, Optimization, Data relationships)\n"
+            "• Python (Pandas, Matplotlib, NumPy, seaborn, scikit-learn)\n"
+            "• Business Analytics (Forecasting, Financial Modelling, Performance Metrics, Risk Analysis, KPI Dashboards, Business performance strategy)\n "
             "• Excel (PivotTables, VLOOKUP, INDEX-MATCH, Data Cleaning, Conditional Formatting)\n"
             "• FastAPI, MySQL\n"
+            
+            "**Resume, Portfolio and GitHub links**:\n"
+            "• Resume: [https://nayan-reddy.github.io/Nayan-Resume/]\n"
+            "• Portfolio: [https://codebasics.io/portfolio/Nayan-Reddy-Soma]\n"
+            "• GitHub: [https://github.com/Nayan-Reddy]\n"
+            
+            "**Contact Information**:\n"
+            "• Gmail: nayanreddy007@gmail.com\n"
+            "• Phone number: +91 9177719157\n"
 
             "**Projects**:\n"
 
