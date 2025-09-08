@@ -2618,6 +2618,7 @@
     "What are your projects",
     "your projects",
     "Nayan projects",
+    "tell me your projects",
     "Projects",
     "List the data analytics projects you’ve completed",
     "What kind of projects have you built?",
@@ -2632,7 +2633,6 @@
 },
 {
   "questions": [
-    "Show me your projects",
     "Do you have any live projects?",
     "Can I see your work?",
     "project links",
@@ -2644,15 +2644,16 @@
     "Expense tracker project link",
     "business 360 link",
     "excel project link",
-    "Show me your work",
     "Where can I view your projects?",
     "Can you share project links?",
     "Do you have any project demos?",
+    "project demo",
+    "project links",
     "Can you show what you've built?",
     "Where can I explore your dashboards?",
     "Do you have any interactive projects?"
   ],
-  "answer": "Absolutely! Here are a few of my live project demos that you can explore:\n\n🔹 **Power BI Project – Business 360 Dashboard**  \n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights)\nAn interactive dashboard built on 1.8M+ rows across sales, marketing, supply chain, and executive views using DAX and snowflake modeling.\n\n🔹 **Expense Tracker App – Built with FastAPI + Streamlit**  \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend)\nA live session-based financial tracker with real-time analytics and visualizations built using Pandas, Matplotlib, Plotly, MySQL, and FastAPI.\n\n🔹 **Excel Dashboard – Division/Product Performance**  \n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\nAn Excel-based dashboard with product and division-wise analytics using pivot tables, slicers, and interactive visuals.\n\n🔹 **SQL Project – Consumer goods Analytics** [GitHub Repo](https://github.com/Nayan-Reddy/Consumer-goods)\nI don't have a live demo for my SQL project but i can explain my SQL project and show you queries that I have used. Just say Explain SQL project or Show sample queries, and I’ll be happy to share!\n\n**You can check out my Portfolio here [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma)\n\nLet me know if you’d like more details about any of these projects or the tech stack used! Just say explain Power BI project"
+  "answer": "Absolutely! Here are a few of my live project demos that you can explore:\n\n🔹 **Power BI Project – Business 360 Dashboard**  \n[View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzFkZGY3NGUtMWIwYy00YjZmLWIzMDYtYjQyMjkxNGRhN2NmIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9) [GitHub Repo](https://github.com/Nayan-Reddy/Business-Insights)\nAn interactive dashboard built on 1.8M+ rows across sales, marketing, supply chain, and executive views using DAX and snowflake modeling.\n\n🔹 **Expense Tracker App – Built with FastAPI + Streamlit**  \n[Try the App](https://expense-tracker-frontend-nayan-reddy.streamlit.app/) [GitHub Repo](https://github.com/Nayan-Reddy/expense-tracker-frontend)\nA live session-based financial tracker with real-time analytics and visualizations built using Pandas, Matplotlib, Plotly, MySQL, and FastAPI.\n\n🔹 **Excel Dashboard – Division/Product Performance**  \n[Explore Excel Project](https://1drv.ms/x/c/e4ca29151a0a4ec4/EeJ0-_SJhOZIjam0emzh_ccBfDKFeWhL2IMsVI7DXtXB0Q?e=jisfwq)\nAn Excel-based dashboard with product and division-wise analytics using pivot tables, slicers, and interactive visuals.\n\n🔹 **SQL Project – Consumer goods Analytics** [GitHub Repo](https://github.com/Nayan-Reddy/Consumer-goods) \nI don't have a live demo for my SQL project but i can explain my SQL project and show you queries that I have used. Just say Explain SQL project or Show sample queries, and I’ll be happy to share!\n\n**You can check out my Portfolio here [Portfolio](https://codebasics.io/portfolio/Nayan-Reddy-Soma)\n\nLet me know if you’d like more details about any of these projects or the tech stack used! Just say explain Power BI project"
 },
 {
   "questions": [
