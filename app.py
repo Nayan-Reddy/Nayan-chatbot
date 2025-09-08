@@ -155,10 +155,15 @@ def get_best_fallback(user_input, nlp_model):
 
     if best_sim >= 0.87: 
         user_words = set(user_clean.split())
+        if not user_words:
+            return None
         match_words = set(clean(matched_question).split())
         common_words = user_words.intersection(match_words)
+        # Calculate the overlap ratio
+        overlap_ratio = len(common_words) / len(user_words)
 
-        if len(common_words) > 0:
+        # Only return a match if the user's query is almost entirely covered by the fallback
+        if overlap_ratio >= 0.8:
             return best_answer
 
     best_fuzzy_score = 0
