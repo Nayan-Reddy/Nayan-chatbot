@@ -179,10 +179,28 @@ def get_best_fallback(user_input, nlp_model):
     return None
 
 
-# Replace your entire style block with this one
+# ----------------- UI HEADER -----------------
 st.markdown("""
     <style>
-        /* Default styles for all elements */
+        /* Base font settings - let Streamlit handle background and base text color */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        h1 {
+            color: #10b981;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .subheader {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        /* --- CHAT BUBBLE STYLES --- */
         .user-bubble {
             background-color: #10b981;
             color: white;
@@ -193,12 +211,6 @@ st.markdown("""
             text-align: right;
         }
 
-        .prompt-suggestions {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-
         .bot-bubble {
             padding: 12px 16px;
             border-radius: 12px;
@@ -207,27 +219,43 @@ st.markdown("""
             text-align: left;
             line-height: 1.6;
         }
-
-        /* --- LIGHT THEME STYLES --- */
-        /* These are the default styles that will be applied */
-        .prompt-suggestions {
-            color: #4a5568;
+        
+        .stButton button {
+            background-color: #10b981;
+            color: white;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-weight: bold;
+            border: none;
         }
 
+        /* --- LIGHT THEME STYLES (DEFAULT) --- */
+        .subheader, .prompt-suggestions {
+            color: #4a5568; /* Dark gray for good readability */
+        }
         .bot-bubble {
-            background-color: #f0f2f6;
-            color: #1a202c;
+            background-color: #f0f2f6; /* A light gray background */
+            color: #1a202c; /* Dark text */
+        }
+        .prompt-suggestions {
+            text-align: center; 
+            margin-bottom: 25px; 
+            font-size: 15px;
+        }
+        hr {
+            border-top: 1px solid #e2e8f0;
         }
 
-        /* --- DARK THEME OVERRIDES --- */
-        /* These styles will ONLY apply when the data-theme is "dark" */
-        [data-theme="dark"] .prompt-suggestions {
-            color: #FFFFFF !important;
+        /* --- DARK THEME STYLES --- */
+        [data-theme="dark"] .subheader, [data-theme="dark"] .prompt-suggestions {
+            color: #c9d1d9; /* Your original light gray for dark mode */
         }
-
         [data-theme="dark"] .bot-bubble {
-            background-color: transparent !important;
-            color: #ffffff !important;
+            background-color: rgba(0,0,0,0); /* Restored transparent background */
+            color: #ffffff; /* Restored white text */
+        }
+        [data-theme="dark"] hr {
+            border-top: 1px solid #30363d;
         }
     </style>
 """, unsafe_allow_html=True)
