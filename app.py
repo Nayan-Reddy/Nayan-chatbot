@@ -178,41 +178,31 @@ def get_best_fallback(user_input, nlp_model):
     if best_fuzzy_score >= 90: return fuzzy_answer
     return None
 
-# ----------------- UI HEADER -----------------
+
 st.markdown("""
     <style>
-        html, body, [class*="css"] {
-            background-color: #0e1117;
-            color: #ffffff;
+        /* Base font settings - let Streamlit handle background and base text color */
+        body {
             font-family: 'Segoe UI', sans-serif;
         }
 
         h1 {
-            color: #34d058;
+            color: #10b981;
             text-align: center;
             margin-bottom: 0;
         }
 
         .subheader {
             text-align: center;
-            color: #c9d1d9;
             font-size: 18px;
             margin-top: 0;
             margin-bottom: 30px;
         }
 
-        .chat-bubble {
-            background-color: #1f2937;
-            color: #f3f4f6;
-            padding: 16px;
-            border-radius: 12px;
-            margin: 12px 0;
-            line-height: 1.6;
-        }
-
+        /* --- CHAT BUBBLE STYLES --- */
         .user-bubble {
             background-color: #10b981;
-            color: black;
+            color: white; /* White text has better contrast on this green */
             padding: 12px 16px;
             border-radius: 12px;
             margin: 20px 0 10px auto;
@@ -221,28 +211,46 @@ st.markdown("""
         }
 
         .bot-bubble {
-            background-color: rgba(0,0,0,0);
-            color: #ffffff;
             padding: 12px 16px;
             border-radius: 12px;
             margin: 10px 0 30px 0;
             max-width: 80%;
             text-align: left;
+            line-height: 1.6;
         }
-
+        
         .stButton button {
             background-color: #10b981;
-            color: black;
+            color: white;
             border-radius: 24px;
             padding: 10px 24px;
             font-weight: bold;
             border: none;
         }
 
+        /* --- LIGHT THEME STYLES (DEFAULT) --- */
+        .subheader {
+            color: #4a5568; /* Dark gray for good readability */
+        }
+        .bot-bubble {
+            background-color: #f0f2f6; /* A light gray background */
+            color: #1a202c; /* Dark text */
+        }
         hr {
-            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* --- DARK THEME STYLES --- */
+        /* Streamlit uses a 'data-theme' attribute to switch themes */
+        [data-theme="dark"] .subheader {
+            color: #c9d1d9; /* Your original light gray for dark mode */
+        }
+        [data-theme="dark"] .bot-bubble {
+            background-color: #1f2937; /* Your original dark bubble color */
+            color: #f3f4f6; /* Your original light text color */
+        }
+        [data-theme="dark"] hr {
             border-top: 1px solid #30363d;
-            margin: 25px 0;
         }
     </style>
 """, unsafe_allow_html=True)
