@@ -179,26 +179,10 @@ def get_best_fallback(user_input, nlp_model):
     return None
 
 
+# Replace your entire style block with this one
 st.markdown("""
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        h1 {
-            color: #10b981;
-            text-align: center;
-            margin-bottom: 0;
-        }
-
-        .subheader {
-            text-align: center;
-            font-size: 18px;
-            margin-top: 0;
-            margin-bottom: 30px;
-        }
-
-        /* --- CHAT BUBBLE STYLES --- */
+        /* Default styles for all elements */
         .user-bubble {
             background-color: #10b981;
             color: white;
@@ -209,6 +193,12 @@ st.markdown("""
             text-align: right;
         }
 
+        .prompt-suggestions {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
         .bot-bubble {
             padding: 12px 16px;
             border-radius: 12px;
@@ -217,51 +207,27 @@ st.markdown("""
             text-align: left;
             line-height: 1.6;
         }
-        
-        .stButton button {
-            background-color: #10b981;
-            color: white;
-            border-radius: 24px;
-            padding: 10px 24px;
-            font-weight: bold;
-            border: none;
-        }
 
+        /* --- LIGHT THEME STYLES --- */
+        /* These are the default styles that will be applied */
         .prompt-suggestions {
-            text-align: center; 
-            margin-bottom: 25px; 
-            font-size: 15px;
-        }
-
-        hr {
-            border-top: 1px solid #e2e8f0;
-        }
-
-        /* --- LIGHT THEME STYLES (DEFAULT) --- */
-        .subheader, .prompt-suggestions {
             color: #4a5568;
         }
+
         .bot-bubble {
             background-color: #f0f2f6;
             color: #1a202c;
         }
 
-        /* --- DARK THEME STYLES (WITH !important TO OVERRIDE DEFAULTS) --- */
-        [data-theme="dark"] .subheader {
-            color: #c9d1d9 !important;
-        }
-        
+        /* --- DARK THEME OVERRIDES --- */
+        /* These styles will ONLY apply when the data-theme is "dark" */
         [data-theme="dark"] .prompt-suggestions {
-            color: #FFFFFF !important; /* Force pure white for prompts */
+            color: #FFFFFF !important;
         }
 
         [data-theme="dark"] .bot-bubble {
-            background-color: transparent !important; /* Force transparent background */
-            color: #ffffff !important; /* Force white text for response */
-        }
-
-        [data-theme="dark"] hr {
-            border-top: 1px solid #30363d !important;
+            background-color: transparent !important;
+            color: #ffffff !important;
         }
     </style>
 """, unsafe_allow_html=True)
