@@ -181,7 +181,6 @@ def get_best_fallback(user_input, nlp_model):
 
 st.markdown("""
     <style>
-        /* Base font settings - let Streamlit handle background and base text color */
         body {
             font-family: 'Segoe UI', sans-serif;
         }
@@ -247,7 +246,7 @@ st.markdown("""
 
         /* --- DARK THEME STYLES --- */
         [data-theme="dark"] .subheader, [data-theme="dark"] .prompt-suggestions {
-            color: #c9d1d9; /* Your original light gray for dark mode */
+            color: #FFFFFF; 
         }
         [data-theme="dark"] .bot-bubble {
             background-color: rgba(0,0,0,0); /* Restored transparent background */
