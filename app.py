@@ -239,29 +239,29 @@ st.markdown("""
 
         /* --- LIGHT THEME STYLES (DEFAULT) --- */
         .subheader, .prompt-suggestions {
-            color: #4a5568; /* Dark gray for good readability */
+            color: #4a5568;
         }
         .bot-bubble {
-            background-color: #f0f2f6; /* A light gray background */
-            color: #1a202c; /* Dark text */
+            background-color: #f0f2f6;
+            color: #1a202c;
         }
 
-        /* --- DARK THEME STYLES --- */
+        /* --- DARK THEME STYLES (WITH !important TO OVERRIDE DEFAULTS) --- */
         [data-theme="dark"] .subheader {
-            color: #c9d1d9;
+            color: #c9d1d9 !important;
         }
         
         [data-theme="dark"] .prompt-suggestions {
-            color: #FFFFFF; /* Makes prompt text pure white */
+            color: #FFFFFF !important; /* Force pure white for prompts */
         }
 
         [data-theme="dark"] .bot-bubble {
-            background-color: rgba(0,0,0,0); /* Transparent background */
-            color: #ffffff; /* White text */
+            background-color: transparent !important; /* Force transparent background */
+            color: #ffffff !important; /* Force white text for response */
         }
 
         [data-theme="dark"] hr {
-            border-top: 1px solid #30363d;
+            border-top: 1px solid #30363d !important;
         }
     </style>
 """, unsafe_allow_html=True)
