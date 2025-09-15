@@ -202,7 +202,7 @@ st.markdown("""
         /* --- CHAT BUBBLE STYLES --- */
         .user-bubble {
             background-color: #10b981;
-            color: white; /* White text has better contrast on this green */
+            color: white;
             padding: 12px 16px;
             border-radius: 12px;
             margin: 20px 0 10px auto;
@@ -229,25 +229,29 @@ st.markdown("""
         }
 
         /* --- LIGHT THEME STYLES (DEFAULT) --- */
-        .subheader {
+        .subheader, .prompt-suggestions {
             color: #4a5568; /* Dark gray for good readability */
         }
         .bot-bubble {
             background-color: #f0f2f6; /* A light gray background */
             color: #1a202c; /* Dark text */
         }
+        .prompt-suggestions {
+            text-align: center; 
+            margin-bottom: 25px; 
+            font-size: 15px;
+        }
         hr {
             border-top: 1px solid #e2e8f0;
         }
 
         /* --- DARK THEME STYLES --- */
-        /* Streamlit uses a 'data-theme' attribute to switch themes */
-        [data-theme="dark"] .subheader {
+        [data-theme="dark"] .subheader, [data-theme="dark"] .prompt-suggestions {
             color: #c9d1d9; /* Your original light gray for dark mode */
         }
         [data-theme="dark"] .bot-bubble {
-            background-color: #1f2937; /* Your original dark bubble color */
-            color: #f3f4f6; /* Your original light text color */
+            background-color: rgba(0,0,0,0); /* Restored transparent background */
+            color: #ffffff; /* Restored white text */
         }
         [data-theme="dark"] hr {
             border-top: 1px solid #30363d;
@@ -397,7 +401,7 @@ if user_input and st.session_state.show_prompts:
 
 if st.session_state.show_prompts:
     st.markdown("""
-    <div style='text-align: center; margin-bottom: 25px; color: #c9d1d9; font-size: 15px;'>
+    <div class='prompt-suggestions'>
         💡 Try asking: <br>
         “Can you introduce yourself?”<br>
         “What are your interests or hobbies outside of work?”<br>
