@@ -179,10 +179,8 @@ def get_best_fallback(user_input, nlp_model):
     return None
 
 
-# ----------------- UI HEADER -----------------
 st.markdown("""
     <style>
-        /* Base font settings - let Streamlit handle background and base text color */
         body {
             font-family: 'Segoe UI', sans-serif;
         }
@@ -231,11 +229,11 @@ st.markdown("""
 
         /* --- LIGHT THEME STYLES (DEFAULT) --- */
         .subheader, .prompt-suggestions {
-            color: #4a5568; /* Dark gray for good readability */
+            color: #4a5568; 
         }
         .bot-bubble {
-            background-color: #f0f2f6; /* A light gray background */
-            color: #1a202c; /* Dark text */
+            background-color: #f0f2f6; 
+            color: #1a202c; 
         }
         .prompt-suggestions {
             text-align: center; 
@@ -248,11 +246,11 @@ st.markdown("""
 
         /* --- DARK THEME STYLES --- */
         [data-theme="dark"] .subheader, [data-theme="dark"] .prompt-suggestions {
-            color: #c9d1d9; /* Your original light gray for dark mode */
+            color: #c9d1d9; 
         }
         [data-theme="dark"] .bot-bubble {
-            background-color: rgba(0,0,0,0); /* Restored transparent background */
-            color: #ffffff; /* Restored white text */
+            background-color: rgba(0,0,0,0); 
+            color: #ffffff; 
         }
         [data-theme="dark"] hr {
             border-top: 1px solid #30363d;
